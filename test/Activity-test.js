@@ -4,9 +4,12 @@ import UserRepository from '../src/UserRepository';
 import User from '../src/User';
 
 describe('Activity', function() {
-  let activity;
+  let activity1;
+  let activity2;
   let user;
   let userRepository;
+  let user1;
+  let user2;
   beforeEach(() => {
     user1 = new User({
       'id': 1,
