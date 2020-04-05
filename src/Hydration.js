@@ -7,8 +7,8 @@ class Hydration {
   }
   drink(userRepo) {
     userRepo.users
-      .find(user => user.id === hydrate.userId)
-      .updateHydration(this.date, this.ounces)
+      .find((user) => user.id === this.userId)
+      .updateHydration(this.date, this.ounces);
   }
 }
 
