@@ -37,38 +37,23 @@ class UserRepository {
   }
   //pull out sum totals from following 2 methods
 
-  PARAMCOUNT.reduce((sum, activityCollection) => {
-    activityCollection.forEach(activity => {
-      sum += activity.flightsOfStairs
-    })
-    return sum;
-  }, 0);
-
-  getSumPARAMCOUNT.reduce((sum, activityCollection) => {
-    activityCollection.forEach(activity => {
-      sum += activity.minutesActive
-    })
-    return sum;
-  }, 0);
-
-  calculateAverageStairs(date) {
-    let allUsersStairsCount = this.filterActivity(date);
-    let sumOfStairs = allUsersStairsCount.reduce((stairsSum, activityCollection) => {
+  getSum(arrToCount, actProperty) {
+    return arrToCount.reduce((sum, activityCollection) => {
       activityCollection.forEach(activity => {
-        stairsSum += activity.flightsOfStairs
+        sum += activity[actProperty]
       })
-      return stairsSum;
+      return sum;
     }, 0);
+  }
+    
+  calculateAverageStairs(date, flightsOfStairs) {
+    let allUsersStairsCount = this.filterActivity(date);
+    let sumOfStairs = this.getSum(allUsersStairsCount, flightsOfStairs);
     return Math.round(sumOfStairs / allUsersStairsCount.length);
   }
-  calculateAverageMinutesActive(date) {
+  calculateAverageMinutesActive(date, minutesActive) {
     let allUsersMinutesActiveCount = this.filterActivity(date);
-    let sumOfMinutesActive = allUsersMinutesActiveCount.reduce((minutesActiveSum, activityCollection) => {
-      activityCollection.forEach(activity => {
-        minutesActiveSum += activity.minutesActive
-      })
-      return minutesActiveSum;
-    }, 0);
+    let sumOfMinutesActive = this.getSum(allUsersMinutesActiveCount, minutesActive);
     return Math.round(sumOfMinutesActive / allUsersMinutesActiveCount.length);
   }
   calculateAverageDailyWater(date) {
