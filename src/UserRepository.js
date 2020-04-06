@@ -21,17 +21,23 @@ class UserRepository {
     return totalSleepQuality / this.users.length;
   }
   filterActivity(date) {
-    this.users.map(user => {
+    return this.users.map(user => {
       return user.activityRecord.filter(activity => activity.date === date);
     })
   }
   calculateAverageSteps(date) {
     let allUsersStepsCount = this.filterActivity(date);
+    let sumOfSteps = allUsersStepsCount.reduce((stepsSum, activityCollection) => {
+      activityCollection.forEach(activity => {
+        stepsSum += activity.steps
+      })
+      return stepsSum;
+    }, 0); 
     return Math.round(sumOfSteps / allUsersStepsCount.length);
   }
   //pull out sum totals from following 2 methods
   calculateAverageStairs(date) {
-    let allUsersStairsCount = this.filterActivity(date)
+    let allUsersStairsCount = this.filterActivity(date);
     let sumOfStairs = allUsersStairsCount.reduce((stairsSum, activityCollection) => {
       activityCollection.forEach(activity => {
         stairsSum += activity.flightsOfStairs
