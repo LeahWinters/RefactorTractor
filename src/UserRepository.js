@@ -36,6 +36,21 @@ class UserRepository {
     return Math.round(sumOfSteps / allUsersStepsCount.length);
   }
   //pull out sum totals from following 2 methods
+
+  PARAMCOUNT.reduce((sum, activityCollection) => {
+    activityCollection.forEach(activity => {
+      sum += activity.flightsOfStairs
+    })
+    return sum;
+  }, 0);
+
+  getSumPARAMCOUNT.reduce((sum, activityCollection) => {
+    activityCollection.forEach(activity => {
+      sum += activity.minutesActive
+    })
+    return sum;
+  }, 0);
+
   calculateAverageStairs(date) {
     let allUsersStairsCount = this.filterActivity(date);
     let sumOfStairs = allUsersStairsCount.reduce((stairsSum, activityCollection) => {
