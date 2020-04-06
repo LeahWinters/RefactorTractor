@@ -10,21 +10,19 @@ class Activity {
     this.doActivity(userRepository);
   }
   doActivity(userRepo) {
-    var activity = this;
-    userRepo.users.find(function(user) {
-      return user.id === activity.userId;
-    }).updateActivities(this);
+      userRepo.users
+        .find(user => user.id === this.userId)
+        .updateActivities(this);
+  }
+  findUser(userRepository) {
+    return userRepository.users.find(user => user.id === this.userId);
   }
   calculateMiles(userRepository) {
-    let walkingUser = userRepository.users.find(user => {
-      return user.id === this.userId;
-    });
+    let walkingUser = this.findUser(userRepository)
     return Math.round(this.steps * walkingUser.strideLength / 5280).toFixed(1);
   }
   compareStepGoal(userRepository) {
-    let userStepGoal = userRepository.users.find(user => {
-      return user.id === this.userId;
-    }).dailyStepGoal;
+    let userStepGoal = this.findUser(userRepository).dailyStepGoal;
     this.reachedStepGoal = this.steps >= userStepGoal;
   }
 }
