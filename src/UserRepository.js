@@ -25,35 +25,30 @@ class UserRepository {
       return user.activityRecord.filter(activity => activity.date === date);
     })
   }
-  calculateAverageSteps(date) {
-    let allUsersStepsCount = this.filterActivity(date);
-    let sumOfSteps = allUsersStepsCount.reduce((stepsSum, activityCollection) => {
+
+  getSum(arrToCount, actProperty) {
+    return arrToCount.reduce((sum, activityCollection) => {
       activityCollection.forEach(activity => {
-        stepsSum += activity.steps
+        sum += activity[actProperty]
       })
-      return stepsSum;
-    }, 0); 
+      return sum;
+    }, 0);
+  }
+
+  calculateAverageSteps(date, steps) {
+    let allUsersStepsCount = this.filterActivity(date);
+    let sumOfSteps = this.getSum(allUsersStepsCount, steps)
     return Math.round(sumOfSteps / allUsersStepsCount.length);
   }
-  //pull out sum totals from following 2 methods
-  calculateAverageStairs(date) {
+
+  calculateAverageStairs(date, flightsOfStairs) {
     let allUsersStairsCount = this.filterActivity(date);
-    let sumOfStairs = allUsersStairsCount.reduce((stairsSum, activityCollection) => {
-      activityCollection.forEach(activity => {
-        stairsSum += activity.flightsOfStairs
-      })
-      return stairsSum;
-    }, 0);
+    let sumOfStairs = this.getSum(allUsersStairsCount, flightsOfStairs);
     return Math.round(sumOfStairs / allUsersStairsCount.length);
   }
-  calculateAverageMinutesActive(date) {
+  calculateAverageMinutesActive(date, minutesActive) {
     let allUsersMinutesActiveCount = this.filterActivity(date);
-    let sumOfMinutesActive = allUsersMinutesActiveCount.reduce((minutesActiveSum, activityCollection) => {
-      activityCollection.forEach(activity => {
-        minutesActiveSum += activity.minutesActive
-      })
-      return minutesActiveSum;
-    }, 0);
+    let sumOfMinutesActive = this.getSum(allUsersMinutesActiveCount, minutesActive);
     return Math.round(sumOfMinutesActive / allUsersMinutesActiveCount.length);
   }
   calculateAverageDailyWater(date) {
@@ -62,7 +57,7 @@ class UserRepository {
     return Math.floor(sumDrankOnDate / todaysDrinkers.length);
   }
   findBestSleepers(date) {
-    return this.users.filter(user => user.calculateAverageQualityThisWeek(date) > 3);
+    return this.users.filter(user => user.calculateSleepAverages(date, user.sleepQualityRecord, 'quality') > 3);
   }
   getLongestSleepers(date) {
     return sleepData
