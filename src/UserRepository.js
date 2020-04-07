@@ -35,7 +35,6 @@ class UserRepository {
     }, 0); 
     return Math.round(sumOfSteps / allUsersStepsCount.length);
   }
-  //pull out sum totals from following 2 methods
 
   getSum(arrToCount, actProperty) {
     return arrToCount.reduce((sum, activityCollection) => {
