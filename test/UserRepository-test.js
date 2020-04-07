@@ -135,7 +135,7 @@ describe('UserRepository', () => {
   it('should have a method that calculates average number of steps for users', () => {
     user1.activityRecord = [{date: "2019/09/17", steps: 100}, {date: "2019/09/17", steps: 2000}];
     user2.activityRecord = [{date: "2019/09/16", steps: 9820}, {date: "2019/09/17", steps: 234}];
-    expect(userRepository.calculateAverageSteps("2019/09/17")).to.equal(778);
+    expect(userRepository.calculateAverageSteps("2019/09/17", "steps")).to.equal(778);
   })
   it('should have a method that calculates average number of active minutes for users', () => {
     user1.activityRecord = [{date: "2019/09/17", minutesActive: 100}, {date: "2019/09/17", minutesActive: 20}];
