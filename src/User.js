@@ -84,14 +84,7 @@
       return b.flightsOfStairs - a.flightsOfStairs;
     })[0].flightsOfStairs;
   }
-  // calculateDailyCalories(date) {
-  //   let totalMinutes = this.activityRecord.filter(activity => {
-  //     return activity.date === date
-  //   }).reduce((sumMinutes, activity) => {
-  //     return sumMinutes += activity.minutesActive
-  //   }, 0);
-  //   return Math.round(totalMinutes * 7.6);
-  // }
+  
   calculateAverageMinutesActiveThisWeek(todayDate) {
     return (this.activityRecord.reduce((sum, activity) => {
       let index = this.activityRecord.indexOf(this.activityRecord.find(activity => activity.date === todayDate));
