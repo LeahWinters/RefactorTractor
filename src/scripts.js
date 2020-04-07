@@ -33,7 +33,8 @@ sleepData.forEach(sleep => {
   sleep = new Sleep(sleep, userRepository);
 });
 
-let user = userRepository.users[0];
+let randomNumber = Math.floor(Math.random() * 49) + 1;
+let user = userRepository.users[randomNumber];
 let todayDate = "2019/09/22";
 user.findFriendsNames(userRepository.users);
 
