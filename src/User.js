@@ -84,14 +84,14 @@
       return b.flightsOfStairs - a.flightsOfStairs;
     })[0].flightsOfStairs;
   }
-  calculateDailyCalories(date) {
-    let totalMinutes = this.activityRecord.filter(activity => {
-      return activity.date === date
-    }).reduce((sumMinutes, activity) => {
-      return sumMinutes += activity.minutesActive
-    }, 0);
-    return Math.round(totalMinutes * 7.6);
-  }
+  // calculateDailyCalories(date) {
+  //   let totalMinutes = this.activityRecord.filter(activity => {
+  //     return activity.date === date
+  //   }).reduce((sumMinutes, activity) => {
+  //     return sumMinutes += activity.minutesActive
+  //   }, 0);
+  //   return Math.round(totalMinutes * 7.6);
+  // }
   calculateAverageMinutesActiveThisWeek(todayDate) {
     return (this.activityRecord.reduce((sum, activity) => {
       let index = this.activityRecord.indexOf(this.activityRecord.find(activity => activity.date === todayDate));
@@ -120,28 +120,19 @@
       return sum;
     }, 0) / 7).toFixed(1);
   }
-  findTrendingStepDays() {
+
+  findTrendingActivityDays(trend, activity, string) {
     let positiveDays = [];
     for (var i = 0; i < this.activityRecord.length; i++) {
-      if (this.activityRecord[i + 1] && this.activityRecord[i].steps > this.activityRecord[i + 1].steps) {
+      if (this.activityRecord[i + 1] && this.activityRecord[i][activity] > this.activityRecord[i + 1][activity]) {
         positiveDays.unshift(this.activityRecord[i].date);
       } else if (positiveDays.length > 2) {
-        this.trendingStepDays.push(`Your most recent positive step streak was ${positiveDays[0]} - ${positiveDays[positiveDays.length - 1]}!`);
+        trend.push(`Your most recent positive ${string} streak was ${positiveDays[0]} - ${positiveDays[positiveDays.length - 1]}!`);
         positiveDays = [];
       }
     }
   }
-  findTrendingStairsDays() {
-    let positiveDays = [];
-    for (var i = 0; i < this.activityRecord.length; i++) {
-      if (this.activityRecord[i + 1] && this.activityRecord[i].flightsOfStairs > this.activityRecord[i + 1].flightsOfStairs) {
-        positiveDays.unshift(this.activityRecord[i].date);
-      } else if (positiveDays.length > 2) {
-        this.trendingStairsDays.push(`Your most recent positive climbing streak was ${positiveDays[0]} - ${positiveDays[positiveDays.length - 1]}!`);
-        positiveDays = [];
-      }
-    }
-  }
+
   findFriendsNames(users) {
     this.friends.forEach(friend => {
       this.friendsNames.push(users.find(user => user.id === friend).getFirstName());

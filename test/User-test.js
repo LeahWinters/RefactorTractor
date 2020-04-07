@@ -153,8 +153,8 @@ describe('User', function() {
       "flightsOfStairs": 16
     });
     expect(user.accomplishedDays.length).to.equal(1);
-  })
-  it('findTrendingStepDays should find 3+ days with positive trend', function() {
+  });
+  it('should find 3+ days with positive steps trend', function() {
     user.activityRecord = [{
     "date": "2019/06/29", "steps": 2},
     {"date": "2019/06/28", "steps": 1},
@@ -168,7 +168,7 @@ describe('User', function() {
     {"date": "2019/06/20", "steps": 8},
     {"date": "2019/06/19", "steps": 11},
     {"date": "2019/06/18", "steps": 10}];
-    user.findTrendingStepDays()
+    user.findTrendingActivityDays(user.trendingStepDays, 'steps', 'step')
     expect(user.trendingStepDays).to.deep.equal(['Your most recent positive step streak was 2019/06/26 - 2019/06/29!', 'Your most recent positive step streak was 2019/06/21 - 2019/06/24!']);
   });
   it('findTrendingStairsDays should find 3+ days with positive trend', function() {
@@ -185,7 +185,7 @@ describe('User', function() {
     {"date": "2019/06/20", "flightsOfStairs": 3},
     {"date": "2019/06/19", "flightsOfStairs": 2},
     {"date": "2019/06/18", "flightsOfStairs": 1}];
-    user.findTrendingStairsDays()
+    user.findTrendingActivityDays(user.trendingStairsDays, 'flightsOfStairs', 'climbing')
     expect(user.trendingStairsDays).to.deep.equal(['Your most recent positive climbing streak was 2019/06/26 - 2019/06/29!', 'Your most recent positive climbing streak was 2019/06/19 - 2019/06/24!']);
   });
   it('findFriendsNames should find the first names of friends', function() {

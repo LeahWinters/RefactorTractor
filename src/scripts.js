@@ -174,12 +174,12 @@ function showInfo() {
 }
 
 function updateTrendingStairsDays() {
-  user.findTrendingStairsDays();
+  user.findTrendingActivityDays(user.trendingStairsDays, 'flightsOfStairs', 'climbing');
   trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
 }
 
 function updateTrendingStepDays() {
-  user.findTrendingStepDays();
+  user.findTrendingActivityDays(user.trendingStepDays, 'steps', 'step');
   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
 }
 
