@@ -1,10 +1,10 @@
 import './css/base.scss';
 import './css/styles.scss';
 
-import userData from './data/users';
-import activityData from './data/activity';
-import sleepData from './data/sleep';
-import hydrationData from './data/hydration';
+// import userData from './data/users';
+// import activityData from './data/activity';
+// import sleepData from './data/sleep';
+// import hydrationData from './data/hydration';
 import fetchData from './index.js';
 
 import UserRepository from './UserRepository';
@@ -13,32 +13,54 @@ import Activity from './Activity';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
 
-let userRepository = new UserRepository();
+let userData;
+let sleepData;
+let activityData;
+let hydrationData;
+let userRepository;
+let user;
+let sleep;
+let activity;
+let hydration;
 
-fetchData();
-console.log(fetchData());
+let onloadHandler = () => {
+  userRepository = new UserRepository();
+  // userData.forEach(newUser => {
+  //   newUser = new User(newUser);
+  //   userRepository.users.push(newUser);
+  // });
+  let randomNumber = Math.floor(Math.random() * 49) + 1;
+  let newUser = new User(userData[randomNumber]);
+  console.log(newUser)
 
-userData.forEach(user => {
-  user = new User(user);
-  userRepository.users.push(user)
-});
+  activityData.forEach(activity => {
+    activity = new Activity(activity, userRepository);
+    console.log(activity)
+  });
 
-activityData.forEach(activity => {
-  activity = new Activity(activity, userRepository);
-});
+  hydrationData.forEach(hydration => {
+    hydration = new Hydration(hydration, userRepository);
+  });
 
-hydrationData.forEach(hydration => {
-  hydration = new Hydration(hydration, userRepository);
-});
+  sleepData.forEach(sleep => {
+    sleep = new Sleep(sleep, userRepository);
+  });
 
-sleepData.forEach(sleep => {
-  sleep = new Sleep(sleep, userRepository);
-});
+  user = userRepository.users[randomNumber];
+  let todayDate = "2019/09/22";
+  user.findFriendsNames(userRepository.users);
+  console.log(user);
+  // console.log(newUser.findFriendsNames(userRepository.users))
+}
 
-let randomNumber = Math.floor(Math.random() * 49) + 1;
-let user = userRepository.users[randomNumber];
-let todayDate = "2019/09/22";
-user.findFriendsNames(userRepository.users);
+fetchData().then(data => {
+  userData = data.userData;
+  sleepData = data.sleepData;
+  activityData = data.activityData;
+  hydrationData = data.hydrationData
+})
+.then(onloadHandler)
+.catch(error => console.log('There\'s been an error!'));
 
 let dailyOz = document.querySelectorAll('.daily-oz');
 let dropdownEmail = document.querySelector('#dropdown-email');
