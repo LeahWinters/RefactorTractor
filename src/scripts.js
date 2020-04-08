@@ -25,17 +25,18 @@ let hydration;
 
 let onloadHandler = () => {
   userRepository = new UserRepository();
-  // userData.forEach(newUser => {
-  //   newUser = new User(newUser);
-  //   userRepository.users.push(newUser);
-  // });
+  userData.forEach(newUser => {
+    newUser = new User(newUser);
+    userRepository.users.push(newUser);
+  });
+  console.log('userRepo', userRepository);
   let randomNumber = Math.floor(Math.random() * 49) + 1;
   let newUser = new User(userData[randomNumber]);
-  console.log(newUser)
+  console.log('newUser', newUser)
 
   activityData.forEach(activity => {
     activity = new Activity(activity, userRepository);
-    console.log(activity)
+    // console.log('activity', activity)
   });
 
   hydrationData.forEach(hydration => {
@@ -49,9 +50,26 @@ let onloadHandler = () => {
   user = userRepository.users[randomNumber];
   let todayDate = "2019/09/22";
   user.findFriendsNames(userRepository.users);
-  console.log(user);
+  console.log('user', user);
   // console.log(newUser.findFriendsNames(userRepository.users))
 }
+
+const activityHandler = () => {
+
+}
+
+const hydrationHandler = () => {
+
+}
+
+const sleepHandler = () => {
+
+}
+
+const userHanlder = () {
+  
+}
+
 
 fetchData().then(data => {
   userData = data.userData;
