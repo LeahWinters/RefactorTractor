@@ -5,6 +5,7 @@ import userData from './data/users';
 import activityData from './data/activity';
 import sleepData from './data/sleep';
 import hydrationData from './data/hydration';
+import fetchData from './index.js';
 
 import UserRepository from './UserRepository';
 import User from './User';
@@ -12,9 +13,10 @@ import Activity from './Activity';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
 
-
-
 let userRepository = new UserRepository();
+
+fetchData();
+console.log(fetchData());
 
 userData.forEach(user => {
   user = new User(user);
