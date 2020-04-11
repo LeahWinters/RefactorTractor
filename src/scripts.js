@@ -19,6 +19,7 @@ let hydration;
 let newUser;
 let sortedHydrationDataByDate;
 let todayDate;
+let currentUserId;
 
 let onloadHandler = () => {
   let randomNumber = Math.floor(Math.random() * 49) + 1;
@@ -63,6 +64,7 @@ const sleepHandler = () => {
 }
 
 const userHandlder = () => {
+  currentUserId = returnUserId();
   displayUserFirstName();
   // findFriendsNames();
   sortHydrationData();
@@ -158,13 +160,35 @@ let postActivityDropdown = document.querySelector('#post-activity-dropdown');
 let postHydrationDropdown = document.querySelector('#post-hydration-dropdown');
 let postSleepDropdown = document.querySelector('#post-sleep-dropdown');
 let dropDownHolder = document.querySelector('#all-drop-downs');
+let ouncesInput = document.querySelector('#ounces-input');
+let submitHydration = document.querySelector('#submit-hydration-button');
 
 header.addEventListener('click', showUpdateDropdown);
 mainPage.addEventListener('click', showInfo);
 stairsTrendingButton.addEventListener('click', updateTrendingStairsDays);
 stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
+submitHydration.addEventListener('click', postHydrationInfo)
 
-function showUpdateDropdown(cardToHide, cardToShow) {
+// POST
+function postHydrationInfo() {
+  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'userID': currentUserId,
+      'date': todayDate,
+      'numOunces': +ouncesInput.value
+    })
+  })
+  .then(response => response.json())
+  .catch(error => console.error(error));
+  ouncesInput.value = '';
+}
+
+// make sure user cant click submit until all inputs are filled out
+function showUpdateDropdown() {
   if (event.target === postActiviyButton) {
     postActivityDropdown.classList.toggle('hide');
     postHydrationDropdown.classList.add('hide');
@@ -190,15 +214,6 @@ function showUpdateDropdown(cardToHide, cardToShow) {
     postSleepDropdown.classList.add('hide');
   }
 }
-
-// if section all drop downs children contains classlist hide
-// then you can click and toggle hide
-// if user clicks on one but then clicks a dif one,
-// toggle hides first one and shows the second
-
-
-// if it does not contain the class list of hide
-
 
 function flipCard(cardToHide, cardToShow) {
  cardToHide.classList.add('hide');
@@ -299,6 +314,11 @@ const displayUserFirstName = () => {
   headerName.innerText = `${user.getFirstName()}'S `;
   displayUserDropDownInfo();
 }
+
+const returnUserId = () => {
+  return user.id;
+}
+
 
 // user A+
 const displayUserDropDownInfo = () => {
