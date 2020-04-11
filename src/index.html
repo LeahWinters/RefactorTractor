@@ -8,10 +8,43 @@
   </head>
   <body>
     <header>
+      <button type='button' role='button' name='button' id='post-activity-button' aria-label="Post Activity">+</button>
+      <section class='hide' id='post-activity-dropdown'>
+        <form class="post-forms" action="https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData" method="post">
+          <h5 id='post-steps' lang='en'>POST YOUR ACTIVITY ACCOMPLISHMENTS</h5>
+          <label for="Steps" lang='en'>Update your number of steps:</label>
+          <input type="number" placeholder="Number of Steps" id="steps-input">
+          <label for="Stairs" lang='en'>Update your number of Stairs:</label>
+          <input type="number" placeholder="Number of Stairs" id="stairs-input">
+          <label for="Minutes" lang='en'>Updates your minutes Active:</label>
+          <input type="number" placeholder="Minutes Active" id="minutes-input">
+          <button type="button" role="button" name="button" id="submit-activity-button" arial-label="Update Activity">Update Activities</button>
+        </form>
+      </section>
+      <button type='button' role='button' name='button' id='post-hyrdation-button' aria-label="Post Hydration">+</button>
+      <section class='hide' id='post-info-dropdown'>
+        <form class="post-forms" action="https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData" method="post">
+          <h5 id='post-hydration' lang='en'>POST YOUR HYDRATION ACCOMPLISHMENTS</h5>
+          <label for="Ounces Drank" lang='en'>Update Ounces Drank:</label>
+          <input type="number" placeholder="Ounces Drank">
+          <button type="button" role="button" name="button" id="submit-hydration-button" arial-label="Update Hydration">Update Hydration</button>
+        </form>
+      </section>
+      <button type='button' role='button' name='button' id='post-sleep-button' aria-label="Update Sleep">+</button>
+      <section class='hide' id='post-info-dropdown'>
+        <form class="post-forms" action="https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData" method="post">
+          <h5 id='post-sleep' lang='en'>POST YOUR SLEEP ACCOMPLISHMENTS</h5>
+          <label for="Hours Slept" lang='en'>Update hours slept</label>
+          <input type="number" placeholder="Hours">
+          <label for="Sleep Quality" lang='en'>Update Sleep Quality</label>
+          <input type="number" placeholder="Quality">
+          <button type="button" role="button" name="button" id="submit-sleep-button" arial-label="Update Sleep">Update Sleep</button>
+        </form>
+      </section>
       <h1 lang='en'><span id='header-name' lang='en' lang='en'></span>FITLIT</h1>
       <button type='button' role='button' name='button' id='profile-button' aria-label="Profile"></button>
       <section class='hide' id='user-info-dropdown'>
-        <h5 id='dropdown-name' lang='en' lang='en'></h5>
+        <h5 id='dropdown-name' lang='en'></h5>
         <p class='dropdown-p' id='dropdown-email' lang='en'></p>
         <p class='dropdown-p' id='dropdown-goal' lang='en'></p>
         <br/>
