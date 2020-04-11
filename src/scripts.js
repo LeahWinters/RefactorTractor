@@ -221,35 +221,52 @@ let postSleepButton = document.querySelector('.post-sleep-button');
 let postActivityDropdown = document.querySelector('#post-activity-dropdown');
 let postHydrationDropdown = document.querySelector('#post-hydration-dropdown');
 let postSleepDropdown = document.querySelector('#post-sleep-dropdown');
+let dropDownHolder = document.querySelector('#all-drop-downs');
 
-header.addEventListener('click', showUpdateDropdown)
+header.addEventListener('click', showUpdateDropdown);
 mainPage.addEventListener('click', showInfo);
-profileButton.addEventListener('click', showDropdown);
 stairsTrendingButton.addEventListener('click', updateTrendingStairsDays);
 stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
 
 function showUpdateDropdown(cardToHide, cardToShow) {
   if (event.target === postActiviyButton) {
-    console.log('act');
     postActivityDropdown.classList.toggle('hide');
+    postHydrationDropdown.classList.add('hide');
+    postSleepDropdown.classList.add('hide');
+    userInfoDropdown.classList.add('hide');
   }
   if (event.target === postHydrationButton) {
-    console.log('hyd');
     postHydrationDropdown.classList.toggle('hide');
+    postActivityDropdown.classList.add('hide');
+    postSleepDropdown.classList.add('hide');
+    userInfoDropdown.classList.add('hide');
   }
   if (event.target === postSleepButton) {
-    console.log('sleep');
     postSleepDropdown.classList.toggle('hide');
+    postActivityDropdown.classList.add('hide');
+    postHydrationDropdown.classList.add('hide');
+    userInfoDropdown.classList.add('hide');
+  }
+  if (event.target === profileButton) {
+    userInfoDropdown.classList.toggle('hide');
+    postActivityDropdown.classList.add('hide');
+    postHydrationDropdown.classList.add('hide');
+    postSleepDropdown.classList.add('hide');
   }
 }
 
-function flipCard(cardToHide, cardToShow) {
-  cardToHide.classList.add('hide');
-  cardToShow.classList.remove('hide');
-}
+// if section all drop downs children contains classlist hide
+// then you can click and toggle hide
+// if user clicks on one but then clicks a dif one,
+// toggle hides first one and shows the second
 
-function showDropdown() {
-  userInfoDropdown.classList.toggle('hide');
+
+// if it does not contain the class list of hide
+
+
+function flipCard(cardToHide, cardToShow) {
+ cardToHide.classList.add('hide');
+ cardToShow.classList.remove('hide');
 }
 
 function showInfo() {
