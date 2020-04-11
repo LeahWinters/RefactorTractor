@@ -22,6 +22,60 @@ button:active {
   outline: none;
 }
 
+.post-activity-button {
+  background-color: #F5634B;
+  border: #F5634B;
+  font-size: 3em;
+  height: 22%;
+  width: 2%;
+}
+
+#post-activity-dropdown {
+  background-color: #1F1F1F;
+  color: white;
+  margin-right: 50%;
+  margin-top: -1.2%;
+  position: relative;
+  text-align: center;
+  z-index: 100;
+}
+
+.post-hydration-button {
+  background-color: #54C6BE;
+  border: #54C6BE;
+  font-size: 3em;
+  height: 22%;
+  width: 2%;
+}
+
+#post-hydration-dropdown {
+  background-color: #1F1F1F;
+  color: white;
+  margin-right: 50%;
+  margin-top: -1.2%;
+  position: relative;
+  text-align: center;
+  z-index: 100;
+}
+
+.post-sleep-button {
+  background-color: #FBD089;
+  border: #FBD089;
+  font-size: 3em;
+  height: 22%;
+  width: 2%;
+}
+
+#post-sleep-dropdown {
+  background-color: #1F1F1F;
+  color: white;
+  margin-right: 50%;
+  margin-top: -1.2%;
+  position: relative;
+  text-align: center;
+  z-index: 100;
+}
+
 #profile-button {
   background-image: url(../images/profile.png);
   background-position: center;

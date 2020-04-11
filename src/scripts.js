@@ -214,32 +214,34 @@ let stepsUserStepsToday = document.querySelector('#steps-user-steps-today');
 let trendingStepsPhraseContainer = document.querySelector('.trending-steps-phrase-container');
 let trendingStairsPhraseContainer = document.querySelector('.trending-stairs-phrase-container');
 let userInfoDropdown = document.querySelector('#user-info-dropdown');
-// let header = document.querySelector('.header');
+let header = document.querySelector('.header');
 let postActiviyButton = document.querySelector('.post-activity-button');
-// let postHydrationButton = document.querySelector('.post-hyrdation-button');
-// let postSleepButton = document.querySelector('.post-sleep-button');
+let postHydrationButton = document.querySelector('.post-hydration-button');
+let postSleepButton = document.querySelector('.post-sleep-button');
+let postActivityDropdown = document.querySelector('#post-activity-dropdown');
+let postHydrationDropdown = document.querySelector('#post-hydration-dropdown');
+let postSleepDropdown = document.querySelector('#post-sleep-dropdown');
 
-postActiviyButton.addEventListener('click', showActivityPostDropDown);
+header.addEventListener('click', showUpdateDropdown)
 mainPage.addEventListener('click', showInfo);
 profileButton.addEventListener('click', showDropdown);
 stairsTrendingButton.addEventListener('click', updateTrendingStairsDays);
 stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
 
-// postHydrationButton.addEventListener('click', showHydrationPostDropDown);
-// postSleepButton.addEventListener('click', showSleepPostDropDown);
-
-function showActivityPostDropDown() {
-  console.log('hey')
-  // remove hide on drop dropdown
+function showUpdateDropdown(cardToHide, cardToShow) {
+  if (event.target === postActiviyButton) {
+    console.log('act');
+    postActivityDropdown.classList.toggle('hide');
+  }
+  if (event.target === postHydrationButton) {
+    console.log('hyd');
+    postHydrationDropdown.classList.toggle('hide');
+  }
+  if (event.target === postSleepButton) {
+    console.log('sleep');
+    postSleepDropdown.classList.toggle('hide');
+  }
 }
-//
-// function showHydrationPostDropDown() {
-//   // remove hide on drop dropdown
-// }
-//
-// function showSleepPostDropDown() {
-//   // remove hide on drop dropdown
-// }
 
 function flipCard(cardToHide, cardToShow) {
   cardToHide.classList.add('hide');
