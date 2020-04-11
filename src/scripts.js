@@ -214,11 +214,32 @@ let stepsUserStepsToday = document.querySelector('#steps-user-steps-today');
 let trendingStepsPhraseContainer = document.querySelector('.trending-steps-phrase-container');
 let trendingStairsPhraseContainer = document.querySelector('.trending-stairs-phrase-container');
 let userInfoDropdown = document.querySelector('#user-info-dropdown');
+// let header = document.querySelector('.header');
+let postActiviyButton = document.querySelector('.post-activity-button');
+// let postHydrationButton = document.querySelector('.post-hyrdation-button');
+// let postSleepButton = document.querySelector('.post-sleep-button');
 
+postActiviyButton.addEventListener('click', showActivityPostDropDown);
 mainPage.addEventListener('click', showInfo);
 profileButton.addEventListener('click', showDropdown);
 stairsTrendingButton.addEventListener('click', updateTrendingStairsDays);
 stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
+
+// postHydrationButton.addEventListener('click', showHydrationPostDropDown);
+// postSleepButton.addEventListener('click', showSleepPostDropDown);
+
+function showActivityPostDropDown() {
+  console.log('hey')
+  // remove hide on drop dropdown
+}
+//
+// function showHydrationPostDropDown() {
+//   // remove hide on drop dropdown
+// }
+//
+// function showSleepPostDropDown() {
+//   // remove hide on drop dropdown
+// }
 
 function flipCard(cardToHide, cardToShow) {
   cardToHide.classList.add('hide');
@@ -285,6 +306,8 @@ function showInfo() {
     flipCard(event.target.parentNode, sleepMainCard);
   }
 }
+
+
 
 //user A+
 function updateTrendingStairsDays() {
