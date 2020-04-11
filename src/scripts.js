@@ -162,14 +162,63 @@ let postSleepDropdown = document.querySelector('#post-sleep-dropdown');
 let dropDownHolder = document.querySelector('#all-drop-downs');
 let ouncesInput = document.querySelector('#ounces-input');
 let submitHydration = document.querySelector('#submit-hydration-button');
+let stepsInput = document.querySelector('#steps-input');
+let stairsInput = document.querySelector('#stairs-input');
+let minutesInput = document.querySelector('#minutes-input');
+let submitActivity = document.querySelector('#submit-activity-button')
+let sleepHoursInput = document.querySelector('#sleep-hours-input');
+let sleepQualityInput = document.querySelector('#sleep-quality-input');
+let submitSleep = document.querySelector('#submit-sleep-button');
 
 header.addEventListener('click', showUpdateDropdown);
 mainPage.addEventListener('click', showInfo);
 stairsTrendingButton.addEventListener('click', updateTrendingStairsDays);
 stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
-submitHydration.addEventListener('click', postHydrationInfo)
+submitHydration.addEventListener('click', postHydrationInfo);
+submitActivity.addEventListener('click', postActivityInfo);
+submitSleep.addEventListener('click', postSleepInfo);
 
 // POST
+function postSleepInfo() {
+  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'userID': currentUserId,
+      'date': todayDate,
+      'hoursSlept': (+sleepHoursInput.value).toFixed(1),
+      'sleepQuality': (+sleepQualityInput.value).toFixed(1),
+    })
+  })
+  .then(response => response.json())
+  .catch(error => console.error(error));
+  sleepHoursInput.value = '';
+  sleepQualityInput.value = ''
+}
+
+function postActivityInfo() {
+  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'userID': currentUserId,
+      'date': todayDate,
+      'numSteps': Math.round(+stepsInput.value),
+      'minutesActive': Math.round(+minutesInput.value),
+      'flightsOfStairs': Math.round(+stairsInput.value)
+    })
+  })
+  .then(response => response.json())
+  .catch(error => console.error(error));
+  stepsInput.value = '';
+  minutesInput.value = '';
+  stairsInput.value = '';
+}
+
 function postHydrationInfo() {
   fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData', {
     method: 'POST',
