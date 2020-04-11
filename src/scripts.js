@@ -150,40 +150,59 @@ let stepsUserStepsToday = document.querySelector('#steps-user-steps-today');
 let trendingStepsPhraseContainer = document.querySelector('.trending-steps-phrase-container');
 let trendingStairsPhraseContainer = document.querySelector('.trending-stairs-phrase-container');
 let userInfoDropdown = document.querySelector('#user-info-dropdown');
-// let header = document.querySelector('.header');
+let header = document.querySelector('.header');
 let postActiviyButton = document.querySelector('.post-activity-button');
-// let postHydrationButton = document.querySelector('.post-hyrdation-button');
-// let postSleepButton = document.querySelector('.post-sleep-button');
+let postHydrationButton = document.querySelector('.post-hydration-button');
+let postSleepButton = document.querySelector('.post-sleep-button');
+let postActivityDropdown = document.querySelector('#post-activity-dropdown');
+let postHydrationDropdown = document.querySelector('#post-hydration-dropdown');
+let postSleepDropdown = document.querySelector('#post-sleep-dropdown');
+let dropDownHolder = document.querySelector('#all-drop-downs');
 
-postActiviyButton.addEventListener('click', showActivityPostDropDown);
+header.addEventListener('click', showUpdateDropdown);
 mainPage.addEventListener('click', showInfo);
-profileButton.addEventListener('click', showDropdown);
 stairsTrendingButton.addEventListener('click', updateTrendingStairsDays);
 stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
 
-// postHydrationButton.addEventListener('click', showHydrationPostDropDown);
-// postSleepButton.addEventListener('click', showSleepPostDropDown);
-
-function showActivityPostDropDown() {
-  console.log('hey')
-  // remove hide on drop dropdown
+function showUpdateDropdown(cardToHide, cardToShow) {
+  if (event.target === postActiviyButton) {
+    postActivityDropdown.classList.toggle('hide');
+    postHydrationDropdown.classList.add('hide');
+    postSleepDropdown.classList.add('hide');
+    userInfoDropdown.classList.add('hide');
+  }
+  if (event.target === postHydrationButton) {
+    postHydrationDropdown.classList.toggle('hide');
+    postActivityDropdown.classList.add('hide');
+    postSleepDropdown.classList.add('hide');
+    userInfoDropdown.classList.add('hide');
+  }
+  if (event.target === postSleepButton) {
+    postSleepDropdown.classList.toggle('hide');
+    postActivityDropdown.classList.add('hide');
+    postHydrationDropdown.classList.add('hide');
+    userInfoDropdown.classList.add('hide');
+  }
+  if (event.target === profileButton) {
+    userInfoDropdown.classList.toggle('hide');
+    postActivityDropdown.classList.add('hide');
+    postHydrationDropdown.classList.add('hide');
+    postSleepDropdown.classList.add('hide');
+  }
 }
-//
-// function showHydrationPostDropDown() {
-//   // remove hide on drop dropdown
-// }
-//
-// function showSleepPostDropDown() {
-//   // remove hide on drop dropdown
-// }
+
+// if section all drop downs children contains classlist hide
+// then you can click and toggle hide
+// if user clicks on one but then clicks a dif one,
+// toggle hides first one and shows the second
+
+
+// if it does not contain the class list of hide
+
 
 function flipCard(cardToHide, cardToShow) {
-  cardToHide.classList.add('hide');
-  cardToShow.classList.remove('hide');
-}
-
-function showDropdown() {
-  userInfoDropdown.classList.toggle('hide');
+ cardToHide.classList.add('hide');
+ cardToShow.classList.remove('hide');
 }
 
 function showInfo() {

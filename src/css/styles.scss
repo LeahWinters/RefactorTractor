@@ -13,13 +13,108 @@ body {
 
 /* HEADER */
 header {
-  text-align: center;
+  display: flex;
   height: 9vw;
+  justify-content: space-between;
 }
 
 button:active {
   border: none;
   outline: none;
+}
+
+.post-buttons-div {
+  align-self: center;
+  display: flex;
+  justify-content: space-around;
+  width: 18%;
+}
+
+// #all-drop-downs {
+//
+// }
+
+label {
+  font-size: 2em;
+}
+
+input {
+  font-size: 1.3em;
+  margin-right: 2%;
+  margin-left: 2%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+#submit-activity-button,
+#submit-hydration-button,
+#submit-sleep-button {
+  font-size: 1.4em;
+}
+
+.post-activity-button {
+  background-color: #F5634B;
+  border: #F5634B;
+  font-size: 5em;
+  height: 47%;
+  width: 24%;
+  border-radius: 29%;
+}
+
+#post-activity-dropdown {
+  background-color: #1F1F1F;
+  color: white;
+  margin-right: 50%;
+  position: relative;
+  text-align: center;
+  z-index: 100;
+}
+
+#all-drop-downs button {
+  width: 50%;
+  align-self: center;
+}
+
+
+.post-hydration-button {
+  background-color: #54C6BE;
+  border: #54C6BE;
+  font-size: 5em;
+  height: 47%;
+  width: 24%;
+  border-radius: 29%;
+}
+
+#post-hydration-dropdown {
+  background-color: #1F1F1F;
+  color: white;
+  margin-right: 50%;
+  margin-top: -1.2%;
+  position: relative;
+  text-align: center;
+  z-index: 100;
+}
+
+.post-sleep-button {
+  background-color: #FBD089;
+  border: #FBD089;
+  font-size: 5em;
+  height: 47%;
+  width: 24%;
+  border-radius: 29%;
+}
+
+#post-sleep-dropdown {
+  background-color: #1F1F1F;
+  color: white;
+  margin-right: 50%;
+  margin-top: -1.2%;
+  position: relative;
+  text-align: center;
+  z-index: 100;
 }
 
 #profile-button {
