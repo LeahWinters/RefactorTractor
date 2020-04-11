@@ -1,12 +1,6 @@
 import './css/base.scss';
 import './css/styles.scss';
-
-// import userData from './data/users';
-// import activityData from './data/activity';
-// import sleepData from './data/sleep';
-// import hydrationData from './data/hydration';
 import fetchData from './index.js';
-
 import UserRepository from './UserRepository';
 import User from './User';
 import Activity from './Activity';
@@ -27,62 +21,30 @@ let sortedHydrationDataByDate;
 let todayDate;
 
 let onloadHandler = () => {
+  let randomNumber = Math.floor(Math.random() * 49) + 1;
+
   userRepository = new UserRepository();
+
   userData.forEach(singleUser => {
     newUser = new User(singleUser);
-
     userRepository.users.push(newUser);
   });
-  console.log('new usaaa', newUser);
-  console.log('userRepooooo', userRepository);
-  let randomNumber = Math.floor(Math.random() * 49) + 1;
-  // let randomUser = new User(userData[randomNumber]);
-
 
   activityData.forEach(acti => {
     activity = new Activity(acti, userRepository);
-
   });
-
-  console.log('helloooo', activity);
 
   sleepData.forEach(datum => {
     sleep = new Sleep(datum, userRepository);
   });
 
-  console.log(sleep);
-
   hydrationData.forEach(datum => {
     hydration = new Hydration(datum, userRepository);
   });
 
-  console.log('hydddd', hydration);
-
-
-  // activity = new Activity(activityData, userRepository);
-  // console.log(userRepository);
-
-  // hydrationData.forEach(hydration => {
-  //   hydration = new Hydration(hydration, userRepository);
-  // });
-
-
-
   user = userRepository.users[randomNumber];
   todayDate = "2019/09/22";
-  user.findFriendsNames(userRepository.users);
-  console.log('user', user);
-  // hydration = new Hydration(hydrationData, userRepository);
-  // console.log(hydration);
-  //
-  // activity = new Activity(activityData, userRepository);
 
-  // console.log(activity);
-  // console.log(newUser.findFriendsNames(userRepository.users))
-  // activityData.forEach(activity => {
-  //   activity = new Activity(activityData, userRepository);
-    // console.log('activityyyy', activity)
-  // });
   userHandlder();
   userRepoHandler();
   activityHandler();
@@ -96,47 +58,30 @@ const activityHandler = () => {
    displayMainStepsCard();
 }
 
-
 const sleepHandler = () => {
    getUserSleepToday();
 }
 
 const userHandlder = () => {
-  headerName.innerText = `${user.getFirstName()}'S `;
-  displayUserDropDownInfo();
-
-  sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
-    if (Object.keys(a)[0] > Object.keys(b)[0]) {
-      return -1;
-    }
-    if (Object.keys(a)[0] < Object.keys(b)[0]) {
-      return 1;
-    }
-    return 0;
-  });
-
+  displayUserFirstName();
+  // findFriendsNames();
+  sortHydrationData();
   displayDailyOunces();
-
-  stepsInfoMilesWalkedToday.innerText = user.activityRecord.find(activity => {
-    return (activity.date === todayDate && activity.userId === user.id)
-  }).calculateMiles(userRepository);
-
   getUserHydrationToday();
   displayUserSleepAverages();
   displayStairsCalendar();
   // displayStairsTrending();
   updateTrendingStairsDays();
   displayStepsCalendar();
+  showWalkedMiles();
   displayFriendsStepsWeekly();
   displayFriendsActivity();
   friendStepStyling();
-
 }
 
 const userRepoHandler = () => {
-  hydrationFriendOuncesToday.innerText = userRepository.calculateAverageDailyWater(todayDate);
-
-  stairsFriendFlightsAverageToday.innerText = (userRepository.calculateAverageStairs(todayDate, 'flightsOfStairs') / 12).toFixed(1);
+  displayFriendsStairs();
+  displayFriendsHydration();
   displayFriendsSleep();
   displayFriendsStepsAverages();
 }
@@ -177,15 +122,6 @@ let sleepInfoQualityAverageAlltime = document.querySelector('#sleep-info-quality
 let sleepInfoQualityToday = document.querySelector('#sleep-info-quality-today');
 let sleepMainCard = document.querySelector('#sleep-main-card');
 let sleepUserHoursToday = document.querySelector('#sleep-user-hours-today');
-// let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
-//   if (Object.keys(a)[0] > Object.keys(b)[0]) {
-//     return -1;
-//   }
-//   if (Object.keys(a)[0] < Object.keys(b)[0]) {
-//     return 1;
-//   }
-//   return 0;
-// });
 let stairsCalendarCard = document.querySelector('#stairs-calendar-card');
 let stairsCalendarFlightsAverageWeekly = document.querySelector('#stairs-calendar-flights-average-weekly');
 let stairsCalendarStairsAverageWeekly = document.querySelector('#stairs-calendar-stairs-average-weekly');
@@ -328,6 +264,22 @@ function displayDailyOunces() {
  }
 }
 
+const sortHydrationData = () => {
+  sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
+    if (Object.keys(a)[0] > Object.keys(b)[0]) {
+      return -1;
+    }
+    if (Object.keys(a)[0] < Object.keys(b)[0]) {
+      return 1;
+    }
+    return 0;
+  });
+}
+
+const displayUserFirstName = () => {
+  headerName.innerText = `${user.getFirstName()}'S `;
+  displayUserDropDownInfo();
+}
 
 // user A+
 const displayUserDropDownInfo = () => {
@@ -336,7 +288,9 @@ const displayUserDropDownInfo = () => {
   dropdownName.innerText = user.name.toUpperCase();
 }
 
-
+const findFriendsNames = () => {
+  user.findFriendsNames(userRepository.users);
+}
 
 // hydration A+
 const getUserHydrationToday = () => {
@@ -348,8 +302,6 @@ const getUserHydrationToday = () => {
   }).numOunces / 8;
 }
 
-
-
 //sleep A+
 const getUserSleepToday = () => {
   sleepInfoQualityToday.innerText = sleepData.find(sleep => {
@@ -360,8 +312,6 @@ const getUserSleepToday = () => {
   }).hoursSlept;
 }
 
-
-
 //user A+
 const displayUserSleepAverages = () => {
   sleepCalendarHoursAverageWeekly.innerText = user.calculateSleepAverages(todayDate, user.sleepHoursRecord, 'hours');
@@ -371,10 +321,11 @@ const displayUserSleepAverages = () => {
 }
 
 //user
-// stepsInfoMilesWalkedToday.innerText = user.activityRecord.find(activity => {
-//   return (activity.date === todayDate && activity.userId === user.id)
-// }).calculateMiles(userRepository);
-
+const showWalkedMiles = () => {
+  stepsInfoMilesWalkedToday.innerText = user.activityRecord.find(activity => {
+    return (activity.date === todayDate && activity.userId === user.id)
+  }).calculateMiles(userRepository);
+}
 //user A+
 const displayStairsCalendar = () => {
   stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageWeeklyExercise(todayDate, 'flightsOfStairs');
@@ -417,6 +368,9 @@ const displayFriendsActivity = () => {
   });
 }
 
+const displayFriendsStairs = () => {
+  stairsFriendFlightsAverageToday.innerText = (userRepository.calculateAverageStairs(todayDate, 'flightsOfStairs') / 12).toFixed(1);
+}
 // This appears to be used with displayFriendsActivity? why isnt color showing for green and red sometimes
 const friendStepStyling = () => {
 let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
@@ -436,6 +390,11 @@ friendsStepsParagraphs.forEach(paragraph => {
 }
 
 //userRepo A +
+
+const displayFriendsHydration = () => {
+    hydrationFriendOuncesToday.innerText = userRepository.calculateAverageDailyWater(todayDate);
+}
+
 const displayFriendsSleep = () => {
   sleepFriendLongestSleeper.innerText = userRepository.users.find(user => {
     return user.id === userRepository.getLongestSleepers(todayDate)
@@ -445,11 +404,6 @@ const displayFriendsSleep = () => {
   }).getFirstName();
 }
 
-//userRepo
-// hydrationFriendOuncesToday.innerText = userRepository.calculateAverageDailyWater(todayDate);
-
-//userRepo
-// stairsFriendFlightsAverageToday.innerText = (userRepository.calculateAverageStairs(todayDate, 'flightsOfStairs') / 12).toFixed(1);
 
 //userRepo A+
 const displayFriendsStepsAverages = () => {
