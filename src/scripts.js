@@ -184,7 +184,7 @@ function postHydrationInfo() {
   })
   .then(response => response.json())
   .catch(error => console.error(error));
-  // clear form-> clearn input
+  ouncesInput.value = '';
 }
 
 // make sure user cant click submit until all inputs are filled out
