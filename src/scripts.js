@@ -1,6 +1,5 @@
 import './css/base.scss';
 import './css/styles.scss';
-import $ from 'jquery';
 import fetchData from './index.js';
 import UserRepository from './UserRepository';
 import User from './User';
@@ -109,13 +108,13 @@ let dropdownGoal = document.querySelector('#dropdown-goal');
 let dropdownName = document.querySelector('#dropdown-name');
 let headerName = document.querySelector('#header-name');
 let hydrationCalendarCard = document.querySelector('#hydration-calendar-card');
-let hydrationFriendOuncesToday = document.querySelector('#hydration-friend-ounces-today');
+// let hydrationFriendOuncesToday = document.querySelector('#hydration-friend-ounces-today');
 let hydrationFriendsCard = document.querySelector('#hydration-friends-card');
 let hydrationInfoCard = document.querySelector('#hydration-info-card');
 let hydrationInfoGlassesToday = document.querySelector('#hydration-info-glasses-today');
 let hydrationMainCard = document.querySelector('#hydration-main-card');
 let hydrationUserOuncesToday = document.querySelector('#hydration-user-ounces-today');
-// let mainPage = document.querySelector('main');
+let mainPage = document.querySelector('main');
 let profileButton = document.querySelector('#profile-button');
 let sleepCalendarCard = document.querySelector('#sleep-calendar-card');
 let sleepCalendarHoursAverageWeekly = document.querySelector('#sleep-calendar-hours-average-weekly');
@@ -137,27 +136,27 @@ let stepsInfoCard = document.querySelector('#steps-info-card');
 let stepsFriendsCard = document.querySelector('#steps-friends-card');
 let stepsTrendingCard = document.querySelector('#steps-trending-card');
 let stepsCalendarCard = document.querySelector('#steps-calendar-card');
-let stairsFriendFlightsAverageToday = document.querySelector('#stairs-friend-flights-average-today');
+// let stairsFriendFlightsAverageToday = document.querySelector('#stairs-friend-flights-average-today');
 let stairsFriendsCard = document.querySelector('#stairs-friends-card');
 let stairsInfoCard = document.querySelector('#stairs-info-card');
 let stairsInfoFlightsToday = document.querySelector('#stairs-info-flights-today');
 let stairsMainCard = document.querySelector('#stairs-main-card');
-// let stairsTrendingButton = document.querySelector('.stairs-trending-button');
+let stairsTrendingButton = document.querySelector('.stairs-trending-button');
 let stairsTrendingCard = document.querySelector('#stairs-trending-card');
 let stairsUserStairsToday = document.querySelector('#stairs-user-stairs-today');
 let stepsCalendarTotalActiveMinutesWeekly = document.querySelector('#steps-calendar-total-active-minutes-weekly');
 let stepsCalendarTotalStepsWeekly = document.querySelector('#steps-calendar-total-steps-weekly');
-let stepsFriendAverageStepGoal = document.querySelector('#steps-friend-average-step-goal');
+// let stepsFriendAverageStepGoal = document.querySelector('#steps-friend-average-step-goal');
 let stepsInfoActiveMinutesToday = document.querySelector('#steps-info-active-minutes-today');
 let stepsInfoMilesWalkedToday = document.querySelector('#steps-info-miles-walked-today');
-let stepsFriendActiveMinutesAverageToday = document.querySelector('#steps-friend-active-minutes-average-today');
-let stepsFriendStepsAverageToday = document.querySelector('#steps-friend-steps-average-today');
-// let stepsTrendingButton = document.querySelector('.steps-trending-button');
+// let stepsFriendActiveMinutesAverageToday = document.querySelector('#steps-friend-active-minutes-average-today');
+// let stepsFriendStepsAverageToday = document.querySelector('#steps-friend-steps-average-today');
+let stepsTrendingButton = document.querySelector('.steps-trending-button');
 let stepsUserStepsToday = document.querySelector('#steps-user-steps-today');
 let trendingStepsPhraseContainer = document.querySelector('.trending-steps-phrase-container');
 let trendingStairsPhraseContainer = document.querySelector('.trending-stairs-phrase-container');
 let userInfoDropdown = document.querySelector('#user-info-dropdown');
-// let header = document.querySelector('.header');
+let header = document.querySelector('.header');
 let postActiviyButton = document.querySelector('.post-activity-button');
 let postHydrationButton = document.querySelector('.post-hydration-button');
 let postSleepButton = document.querySelector('.post-sleep-button');
@@ -166,22 +165,22 @@ let postHydrationDropdown = document.querySelector('#post-hydration-dropdown');
 let postSleepDropdown = document.querySelector('#post-sleep-dropdown');
 let dropDownHolder = document.querySelector('#all-drop-downs');
 let ouncesInput = document.querySelector('#ounces-input');
-// let submitHydration = document.querySelector('#submit-hydration-button');
+let submitHydration = document.querySelector('#submit-hydration-button');
 let stepsInput = document.querySelector('#steps-input');
 let stairsInput = document.querySelector('#stairs-input');
 let minutesInput = document.querySelector('#minutes-input');
-// let submitActivity = document.querySelector('#submit-activity-button')
+let submitActivity = document.querySelector('#submit-activity-button')
 let sleepHoursInput = document.querySelector('#sleep-hours-input');
 let sleepQualityInput = document.querySelector('#sleep-quality-input');
-// let submitSleep = document.querySelector('#submit-sleep-button');
+let submitSleep = document.querySelector('#submit-sleep-button');
 
-$('.header').on('click', showUpdateDropdown);
-$('main').on('click', showInfo);
-$('.stairs-trending-button').on('click', updateTrendingStairsDays);
-$('.steps-trending-button').on('click', updateTrendingStepDays);
-$('#submit-hydration-button').on('click', postHydrationInfo);
-$('#submit-activity-button').on('click', postActivityInfo);
-$('#submit-sleep-button').on('click', postSleepInfo);
+header.addEventListener('click', showUpdateDropdown);
+mainPage.addEventListener('click', showInfo);
+stairsTrendingButton.addEventListener('click', updateTrendingStairsDays);
+stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
+submitHydration.addEventListener('click', postHydrationInfo);
+submitActivity.addEventListener('click', postActivityInfo);
+submitSleep.addEventListener('click', postSleepInfo);
 
 // POST
 function postSleepInfo() {
@@ -493,8 +492,9 @@ const displayFriendsActivity = () => {
 }
 
 const displayFriendsStairs = () => {
-  stairsFriendFlightsAverageToday.innerText = (userRepository.calculateAverageStairs(todayDate, 'flightsOfStairs') / 12).toFixed(1);
+  $('#stairs-friend-flights-average-today').text((userRepository.calculateAverageStairs(todayDate, 'flightsOfStairs') / 12).toFixed(1))
 }
+
 // This appears to be used with displayFriendsActivity? why isnt color showing for green and red sometimes
 const friendStepStyling = () => {
 let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
@@ -516,10 +516,13 @@ friendsStepsParagraphs.forEach(paragraph => {
 //userRepo A +
 
 const displayFriendsHydration = () => {
-    hydrationFriendOuncesToday.innerText = userRepository.calculateAverageDailyWater(todayDate);
+  $('#hydration-friend-ounces-today').text(userRepository.calculateAverageDailyWater(todayDate));
 }
 
 const displayFriendsSleep = () => {
+  // $('#sleep-friend-longest-sleeper').text(userRepository.users.find(user => {
+  //   return user.id === userRepository.getLongestSleepers(todayDate)
+  // })).getFirstName();
   sleepFriendLongestSleeper.innerText = userRepository.users.find(user => {
     return user.id === userRepository.getLongestSleepers(todayDate)
   }).getFirstName();
@@ -531,12 +534,17 @@ const displayFriendsSleep = () => {
 
 //userRepo A+
 const displayFriendsStepsAverages = () => {
-  stepsFriendActiveMinutesAverageToday.innerText = userRepository.calculateAverageMinutesActive(todayDate, 'minutesActive');
-  stepsFriendAverageStepGoal.innerText = `${userRepository.calculateAverageStepGoal()}`;
-  stepsFriendStepsAverageToday.innerText = userRepository.calculateAverageSteps(todayDate, 'steps');
+  $('#steps-friend-active-minutes-average-today').text(userRepository.calculateAverageMinutesActive(todayDate, 'minutesActive'));
+  $('#steps-friend-average-step-goal').text(`${userRepository.calculateAverageStepGoal()}`);
+  $('#steps-friend-steps-average-today').text(userRepository.calculateAverageSteps(todayDate, 'steps'));
 }
 
 
+// const gatherUserInfo = () => {
+//   activityData.find(activity => {
+//     return activity.userID === user.id && activity.date === todayDate;
+//   });
+// }
 
 //activity A+
 const displayStairsInfo = () => {
@@ -561,6 +569,7 @@ const displayStepsInfo = () => {
 
 //activity ?? wtf is numsteps <- this is on the activity data A+
 const displayMainStepsCard = () => {
+  // $('#steps-user-steps-today').text(gatherUserInfo().activity.numSteps);
   stepsUserStepsToday.innerText = activityData.find(activity => {
     return activity.userID === user.id && activity.date === todayDate;
   }).numSteps;
