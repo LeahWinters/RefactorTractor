@@ -1,3 +1,11 @@
+$back-ground-color: #1F1F1F;
+$hydration-color: #54C6BE;
+$sleep-color: #FBD089;
+$steps-color: #F5634B;
+$stairs-color: #8975B2;
+$white-font-color: #FFFFFF;
+$main-font: sans-serif;
+
 *,
 *:after,
 *:before {
@@ -7,8 +15,8 @@ padding: 0;
 }
 
 body {
-  background-color: #1F1F1F;
-  font-family: 'Oswald', sans-serif;
+  background-color: $back-ground-color;
+  font-family: 'Oswald', $main-font;
 }
 
 /* HEADER */
@@ -29,10 +37,6 @@ button:active {
   justify-content: space-around;
   width: 18%;
 }
-
-// #all-drop-downs {
-//
-// }
 
 label {
   font-size: 2em;
@@ -55,22 +59,25 @@ form {
   font-size: 1.4em;
 }
 
-.post-activity-button {
-  background-color: #F5634B;
-  border: #F5634B;
+.post-activity-button,
+.post-hydration-button,
+.post-sleep-button {
   font-size: 5em;
   height: 47%;
   width: 24%;
   border-radius: 29%;
 }
 
+.post-activity-button {
+  background-color: $steps-color;
+  border: $steps-color;
+}
+
 #post-activity-dropdown {
-  background-color: #1F1F1F;
-  color: white;
+  background-color: $back-ground-color;
+  color: $white-font-color;
   margin-right: 50%;
-  position: relative;
   text-align: center;
-  z-index: 100;
 }
 
 #all-drop-downs button {
@@ -78,43 +85,42 @@ form {
   align-self: center;
 }
 
-
 .post-hydration-button {
-  background-color: #54C6BE;
-  border: #54C6BE;
-  font-size: 5em;
-  height: 47%;
-  width: 24%;
-  border-radius: 29%;
+  background-color: $hydration-color;
+  border: $hydration-color;
 }
 
 #post-hydration-dropdown {
-  background-color: #1F1F1F;
-  color: white;
+  background-color: $back-ground-color;
+  color: $white-font-color;
   margin-right: 50%;
-  margin-top: -1.2%;
-  position: relative;
   text-align: center;
-  z-index: 100;
 }
 
 .post-sleep-button {
-  background-color: #FBD089;
-  border: #FBD089;
-  font-size: 5em;
-  height: 47%;
-  width: 24%;
-  border-radius: 29%;
+  background-color: $sleep-color;
+  border: $sleep-color;
 }
 
 #post-sleep-dropdown {
-  background-color: #1F1F1F;
-  color: white;
+  background-color: $back-ground-color;
+  color: $white-font-color;
   margin-right: 50%;
-  margin-top: -1.2%;
-  position: relative;
   text-align: center;
-  z-index: 100;
+}
+
+.sleep-quality-form,
+.hydration-form,
+.minutes-active-form {
+  margin-bottom: 2%;
+}
+
+.minutes-active-form {
+  padding-left: 1.5%;
+}
+
+.sleep-hours-form {
+  padding-left: 3.5%;
 }
 
 #profile-button {
@@ -131,13 +137,11 @@ form {
 }
 
 #user-info-dropdown {
-  background-color: #1F1F1F;
-  color: white;
+  background-color: $back-ground-color;
+  color: $white-font-color;
   margin-left: 60%;
   margin-top: -1.2%;
-  position: relative;
   text-align: center;
-  z-index: 100;
 }
 
 .dropdown-p {
@@ -151,7 +155,7 @@ form {
 
 /* TEXT ELEMENTS */
 h1 {
-  color: #fff;
+  color: $white-font-color;
   display: inline;
   font-size: 5.4vw;
   letter-spacing: .2em;
@@ -164,7 +168,7 @@ h2 {
 
 h3 {
   display: inline;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Work Sans', $main-font;
   font-size: 3vw;
   font-weight: 700;
   letter-spacing: .2em;
@@ -181,7 +185,7 @@ h5 {
 }
 
 p {
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Work Sans', $main-font;
   font-size: 1.2vw;
   font-weight: 600;
   letter-spacing: .2vw;
@@ -222,25 +226,25 @@ main {
 }
 
 #steps-card-container {
-  background-color: #F5634B;
+  background-color: $steps-color;
   grid-area: steps;
   margin: .5vw;
 }
 
 #hydration-card-container {
-  background-color: #54C6BE;
+  background-color: $hydration-color;
   grid-area: hydration;
   margin: .5vw;
 }
 
 #stairs-card-container {
-  background-color: #8975B2;
+  background-color: $stairs-color;
   grid-area: stairs;
   margin: .5vw;
 }
 
 #sleep-card-container {
-  background-color: #FBD089;
+  background-color: $sleep-color;
   grid-area: sleep;
   margin: .5vw;
 }
