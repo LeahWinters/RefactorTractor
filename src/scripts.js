@@ -32,13 +32,17 @@ let onloadHandler = () => {
     userRepository.users.push(newUser);
   });
 
+
+
   activityData.forEach(acti => {
     activity = new Activity(acti, userRepository);
   });
-
+  console.log(activity)
   sleepData.forEach(datum => {
     sleep = new Sleep(datum, userRepository);
   });
+
+
 
   hydrationData.forEach(datum => {
     hydration = new Hydration(datum, userRepository);
