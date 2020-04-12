@@ -1,6 +1,5 @@
 import './css/base.scss';
 import './css/styles.scss';
-import $ from 'jquery';
 import fetchData from './index.js';
 import UserRepository from './UserRepository';
 import User from './User';
@@ -171,13 +170,13 @@ let sleepHoursInput = $('#sleep-hours-input');
 let sleepQualityInput = $('#sleep-quality-input');
 // let submitSleep = document.querySelector('#submit-sleep-button');
 
-$('.header').on('click', showUpdateDropdown);
-$('main').on('click', showInfo);
-$('.stairs-trending-button').on('click', updateTrendingStairsDays);
-$('.steps-trending-button').on('click', updateTrendingStepDays);
-$('#submit-hydration-button').on('click', postHydrationInfo);
-$('#submit-activity-button').on('click', postActivityInfo);
-$('#submit-sleep-button').on('click', postSleepInfo);
+header.addEventListener('click', showUpdateDropdown);
+mainPage.addEventListener('click', showInfo);
+stairsTrendingButton.addEventListener('click', updateTrendingStairsDays);
+stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
+submitHydration.addEventListener('click', postHydrationInfo);
+submitActivity.addEventListener('click', postActivityInfo);
+submitSleep.addEventListener('click', postSleepInfo);
 
 // POST
 function postSleepInfo() {
@@ -489,8 +488,9 @@ const displayFriendsActivity = () => {
 }
 
 const displayFriendsStairs = () => {
-  stairsFriendFlightsAverageToday.innerText = (userRepository.calculateAverageStairs(todayDate, 'flightsOfStairs') / 12).toFixed(1);
+  $('#stairs-friend-flights-average-today').text((userRepository.calculateAverageStairs(todayDate, 'flightsOfStairs') / 12).toFixed(1))
 }
+
 // This appears to be used with displayFriendsActivity? why isnt color showing for green and red sometimes
 const friendStepStyling = () => {
 let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
@@ -512,10 +512,13 @@ friendsStepsParagraphs.forEach(paragraph => {
 //userRepo A +
 
 const displayFriendsHydration = () => {
-    hydrationFriendOuncesToday.innerText = userRepository.calculateAverageDailyWater(todayDate);
+  $('#hydration-friend-ounces-today').text(userRepository.calculateAverageDailyWater(todayDate));
 }
 
 const displayFriendsSleep = () => {
+  // $('#sleep-friend-longest-sleeper').text(userRepository.users.find(user => {
+  //   return user.id === userRepository.getLongestSleepers(todayDate)
+  // })).getFirstName();
   sleepFriendLongestSleeper.innerText = userRepository.users.find(user => {
     return user.id === userRepository.getLongestSleepers(todayDate)
   }).getFirstName();
@@ -527,12 +530,17 @@ const displayFriendsSleep = () => {
 
 //userRepo A+
 const displayFriendsStepsAverages = () => {
-  stepsFriendActiveMinutesAverageToday.innerText = userRepository.calculateAverageMinutesActive(todayDate, 'minutesActive');
-  stepsFriendAverageStepGoal.innerText = `${userRepository.calculateAverageStepGoal()}`;
-  stepsFriendStepsAverageToday.innerText = userRepository.calculateAverageSteps(todayDate, 'steps');
+  $('#steps-friend-active-minutes-average-today').text(userRepository.calculateAverageMinutesActive(todayDate, 'minutesActive'));
+  $('#steps-friend-average-step-goal').text(`${userRepository.calculateAverageStepGoal()}`);
+  $('#steps-friend-steps-average-today').text(userRepository.calculateAverageSteps(todayDate, 'steps'));
 }
 
 
+// const gatherUserInfo = () => {
+//   activityData.find(activity => {
+//     return activity.userID === user.id && activity.date === todayDate;
+//   });
+// }
 
 //activity A+
 const displayStairsInfo = () => {
@@ -557,6 +565,7 @@ const displayStepsInfo = () => {
 
 //activity ?? wtf is numsteps <- this is on the activity data A+
 const displayMainStepsCard = () => {
+  // $('#steps-user-steps-today').text(gatherUserInfo().activity.numSteps);
   stepsUserStepsToday.innerText = activityData.find(activity => {
     return activity.userID === user.id && activity.date === todayDate;
   }).numSteps;
