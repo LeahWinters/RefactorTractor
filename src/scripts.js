@@ -1,5 +1,6 @@
 import './css/base.scss';
 import './css/styles.scss';
+import $ from 'jquery';
 import fetchData from './index.js';
 import UserRepository from './UserRepository';
 import User from './User';
@@ -110,7 +111,7 @@ let hydrationInfoCard = document.querySelector('#hydration-info-card');
 let hydrationInfoGlassesToday = document.querySelector('#hydration-info-glasses-today');
 let hydrationMainCard = document.querySelector('#hydration-main-card');
 let hydrationUserOuncesToday = document.querySelector('#hydration-user-ounces-today');
-let mainPage = document.querySelector('main');
+// let mainPage = document.querySelector('main');
 let profileButton = document.querySelector('#profile-button');
 let sleepCalendarCard = document.querySelector('#sleep-calendar-card');
 let sleepCalendarHoursAverageWeekly = document.querySelector('#sleep-calendar-hours-average-weekly');
@@ -137,7 +138,7 @@ let stairsFriendsCard = document.querySelector('#stairs-friends-card');
 let stairsInfoCard = document.querySelector('#stairs-info-card');
 let stairsInfoFlightsToday = document.querySelector('#stairs-info-flights-today');
 let stairsMainCard = document.querySelector('#stairs-main-card');
-let stairsTrendingButton = document.querySelector('.stairs-trending-button');
+// let stairsTrendingButton = document.querySelector('.stairs-trending-button');
 let stairsTrendingCard = document.querySelector('#stairs-trending-card');
 let stairsUserStairsToday = document.querySelector('#stairs-user-stairs-today');
 let stepsCalendarTotalActiveMinutesWeekly = document.querySelector('#steps-calendar-total-active-minutes-weekly');
@@ -147,12 +148,12 @@ let stepsInfoActiveMinutesToday = document.querySelector('#steps-info-active-min
 let stepsInfoMilesWalkedToday = document.querySelector('#steps-info-miles-walked-today');
 let stepsFriendActiveMinutesAverageToday = document.querySelector('#steps-friend-active-minutes-average-today');
 let stepsFriendStepsAverageToday = document.querySelector('#steps-friend-steps-average-today');
-let stepsTrendingButton = document.querySelector('.steps-trending-button');
+// let stepsTrendingButton = document.querySelector('.steps-trending-button');
 let stepsUserStepsToday = document.querySelector('#steps-user-steps-today');
 let trendingStepsPhraseContainer = document.querySelector('.trending-steps-phrase-container');
 let trendingStairsPhraseContainer = document.querySelector('.trending-stairs-phrase-container');
 let userInfoDropdown = document.querySelector('#user-info-dropdown');
-let header = document.querySelector('.header');
+// let header = document.querySelector('.header');
 let postActiviyButton = document.querySelector('.post-activity-button');
 let postHydrationButton = document.querySelector('.post-hydration-button');
 let postSleepButton = document.querySelector('.post-sleep-button');
@@ -161,22 +162,22 @@ let postHydrationDropdown = document.querySelector('#post-hydration-dropdown');
 let postSleepDropdown = document.querySelector('#post-sleep-dropdown');
 let dropDownHolder = document.querySelector('#all-drop-downs');
 let ouncesInput = document.querySelector('#ounces-input');
-let submitHydration = document.querySelector('#submit-hydration-button');
+// let submitHydration = document.querySelector('#submit-hydration-button');
 let stepsInput = document.querySelector('#steps-input');
 let stairsInput = document.querySelector('#stairs-input');
 let minutesInput = document.querySelector('#minutes-input');
-let submitActivity = document.querySelector('#submit-activity-button')
+// let submitActivity = document.querySelector('#submit-activity-button')
 let sleepHoursInput = document.querySelector('#sleep-hours-input');
 let sleepQualityInput = document.querySelector('#sleep-quality-input');
-let submitSleep = document.querySelector('#submit-sleep-button');
+// let submitSleep = document.querySelector('#submit-sleep-button');
 
-header.addEventListener('click', showUpdateDropdown);
-mainPage.addEventListener('click', showInfo);
-stairsTrendingButton.addEventListener('click', updateTrendingStairsDays);
-stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
-submitHydration.addEventListener('click', postHydrationInfo);
-submitActivity.addEventListener('click', postActivityInfo);
-submitSleep.addEventListener('click', postSleepInfo);
+$('.header').on('click', showUpdateDropdown);
+$('main').on('click', showInfo);
+$('.stairs-trending-button').on('click', updateTrendingStairsDays);
+$('.steps-trending-button').on('click', updateTrendingStepDays);
+$('#submit-hydration-button').on('click', postHydrationInfo);
+$('#submit-activity-button').on('click', postActivityInfo);
+$('#submit-sleep-button').on('click', postSleepInfo);
 
 // POST
 function postSleepInfo() {
@@ -201,7 +202,7 @@ function postSleepInfo() {
   sleepQualityInput.value = '';
   postSleepDropdown.classList.add('hide');
   alert('Successful submission!')
-  } 
+  }
 }
 
 function postActivityInfo() {
@@ -256,7 +257,7 @@ function postHydrationInfo() {
 
 // const hydrationValidation = () => {
   // if(ouncesInput.value !== '') {
-    
+
   // } else {
   //   alert('You need to enter a valid number!')
   // }
