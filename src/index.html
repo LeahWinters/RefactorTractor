@@ -25,11 +25,11 @@
             <input type="number" placeholder="Number of Steps" id="steps-input" min='0'>
           </div>
           <div class="stairs-form">
-            <label for="Stairs" lang='en'>Update your number of Stairs:</label>
+            <label for="Stairs" lang='en'>Update your number of stairs:</label>
             <input type="number" placeholder="Number of Stairs" id="stairs-input" min='0'>
           </div>
           <div class="minutes-active-form">
-            <label for="Minutes" lang='en'>Updates your minutes Active:</label>
+            <label for="Minutes" lang='en'>Updates your minutes active:</label>
             <input type="number" placeholder="Minutes Active" id="minutes-input" min='0'>
           </div>
           <button type="button" role="button" name="button" id="submit-activity-button" arial-label="Update Activity">Update Activities</button>
@@ -39,7 +39,7 @@
         <form class="post-forms" action="https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData" method="post">
           <h5 id='post-hydration' lang='en'>POST YOUR HYDRATION ACCOMPLISHMENTS</h5>
           <div class="hydration-form">
-            <label for="Ounces Drank" lang='en'>Update Ounces Drank:</label>
+            <label for="Ounces Drank" lang='en' id='ounces-label'>Update ounces drank:</label>
             <input type="number" placeholder="Ounces Drank" id="ounces-input" min='0'>
           </div>
           <button type="button" role="button" name="button" id="submit-hydration-button" arial-label="Update Hydration">Update Hydration</button>
@@ -49,11 +49,11 @@
         <form class="post-forms" action="https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData" method="post">
           <h5 id='post-sleep' lang='en'>POST YOUR SLEEP ACCOMPLISHMENTS</h5>
           <div class="sleep-hours-form">
-            <label for="Hours Slept" lang='en'>Update hours slept</label>
+            <label for="Hours Slept" lang='en'>Update hours slept:</label>
             <input type="number" placeholder="Hours" id='sleep-hours-input' min='0' max='24'>
           </div>
           <div class="sleep-quality-form">
-            <label for="Sleep Quality" lang='en'>Update Sleep Quality</label>
+            <label for="Sleep Quality" lang='en'>Update sleep quality:</label>
             <input type="number" placeholder="Quality" id='sleep-quality-input' min='0' max='5'>
           </div>
           <button type="button" role="button" name="button" id="submit-sleep-button" arial-label="Update Sleep">Update Sleep</button>
