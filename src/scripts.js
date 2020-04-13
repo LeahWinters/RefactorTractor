@@ -54,14 +54,14 @@ let onloadHandler = () => {
 }
 
 const activityHandler = () => {
-   displayStairsInfo();
-   displayMainStairsCard();
-   displayStepsInfo();
-   displayMainStepsCard();
+  displayStairsInfo();
+  displayMainStairsCard();
+  displayStepsInfo();
+  displayMainStepsCard();
 }
 
 const sleepHandler = () => {
-   getUserSleepToday();
+  getUserSleepToday();
 }
 
 const userHandlder = () => {
@@ -73,7 +73,8 @@ const userHandlder = () => {
   getUserHydrationToday();
   displayUserSleepAverages();
   displayStairsCalendar();
-  // displayStairsTrending();
+  displayStairsTrending();
+  displayStepsTrending()
   updateTrendingStairsDays();
   displayStepsCalendar();
   showWalkedMiles();
@@ -90,13 +91,13 @@ const userRepoHandler = () => {
 }
 
 fetchData().then(data => {
-  userData = data.userData;
-  sleepData = data.sleepData;
-  activityData = data.activityData;
-  hydrationData = data.hydrationData
-})
-.then(onloadHandler)
-.catch(error => console.log(error));
+    userData = data.userData;
+    sleepData = data.sleepData;
+    activityData = data.activityData;
+    hydrationData = data.hydrationData
+  })
+  .then(onloadHandler)
+  .catch(error => console.log(error));
 
 let dailyOz = document.querySelectorAll('.daily-oz');
 // let dropdownEmail = $('#dropdown-email');
@@ -172,7 +173,7 @@ let sleepQualityInput = document.querySelector('#sleep-quality-input');
 // let submitSleep = document.querySelector('#submit-sleep-button');
 
 $('.header').click(showUpdateDropdown);
-$('main').click(showInfo);
+$('main').on('click', showInfo);
 $('.stairs-trending-button').click(updateTrendingStairsDays);
 $('.steps-trending-button').click(updateTrendingStepDays);
 $('#submit-hydration-button').click(postHydrationInfo);
@@ -184,89 +185,76 @@ function postSleepInfo() {
   if (!sleepHoursInput.value || sleepHoursInput.value > 24 || !sleepQualityInput.value || sleepQualityInput.value > 5) {
     alert('You need to enter a valid number!')
   } else {
-  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      'userID': currentUserId,
-      'date': todayDate,
-      'hoursSlept': parseInt((+sleepHoursInput.value).toFixed(1)),
-      'sleepQuality': parseInt((+sleepQualityInput.value).toFixed(1)),
-    })
-  })
-  .then(response => response.json())
-  .catch(error => console.error(error));
-  sleepHoursInput.value = '';
-  sleepQualityInput.value = '';
-  postSleepDropdown.classList.add('hide');
-  alert('Successful submission!')
+    fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'userID': currentUserId,
+          'date': todayDate,
+          'hoursSlept': parseInt((+sleepHoursInput.value).toFixed(1)),
+          'sleepQuality': parseInt((+sleepQualityInput.value).toFixed(1)),
+        })
+      })
+      .then(response => response.json())
+      .catch(error => console.error(error));
+    sleepHoursInput.value = '';
+    sleepQualityInput.value = '';
+    postSleepDropdown.classList.add('hide');
+    alert('Successful submission!')
   }
 }
 
 function postActivityInfo() {
-  if(!stepsInput.value || !minutesInput.value) {
+  if (!stepsInput.value || !minutesInput.value) {
     alert('You need to enter a valid number!')
   } else {
-  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      'userID': currentUserId,
-      'date': todayDate,
-      'numSteps': Math.round(+stepsInput.value),
-      'minutesActive': Math.round(+minutesInput.value),
-      'flightsOfStairs': Math.round(+stairsInput.value)
-    })
-  })
-  .then(response => response.json())
-  .catch(error => console.error(error));
-  stepsInput.value = '';
-  minutesInput.value = '';
-  stairsInput.value = '';
-  postActivityDropdown.classList.add('hide');
-  alert('Successful submission!')
+    fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'userID': currentUserId,
+          'date': todayDate,
+          'numSteps': Math.round(+stepsInput.value),
+          'minutesActive': Math.round(+minutesInput.value),
+          'flightsOfStairs': Math.round(+stairsInput.value)
+        })
+      })
+      .then(response => response.json())
+      .catch(error => console.error(error));
+    stepsInput.value = '';
+    minutesInput.value = '';
+    stairsInput.value = '';
+    postActivityDropdown.classList.add('hide');
+    alert('Successful submission!')
   }
 }
 
 function postHydrationInfo() {
-  if(!ouncesInput.value) {
+  if (!ouncesInput.value) {
     alert('You need to enter a valid number!')
   } else {
-  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      'userID': currentUserId,
-      'date': todayDate,
-      'numOunces': +ouncesInput.value
-    })
-  })
-  .then(response => response.json())
-  .catch(error => console.error(error));
-  ouncesInput.value = '';
-  postHydrationDropdown.classList.add('hide');
-  alert('Successful submission!')
+    fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'userID': currentUserId,
+          'date': todayDate,
+          'numOunces': +ouncesInput.value
+        })
+      })
+      .then(response => response.json())
+      .catch(error => console.error(error));
+    ouncesInput.value = '';
+    postHydrationDropdown.classList.add('hide');
+    alert('Successful submission!')
   }
 }
-
-// const hydrationValidation = () => {
-  // if(ouncesInput.value !== '') {
-
-  // } else {
-  //   alert('You need to enter a valid number!')
-  // }
-// }
-// postHydrationInfo()
-// let ouncesLabel = document.querySelector('#ounces-label')
-// ouncesLabel.style.color('#54C6BE')
-// if value is blank, label has color
-// on keyup change color
 
 // make sure user cant click submit until all inputs are filled out
 function showUpdateDropdown() {
@@ -361,20 +349,20 @@ function showInfo() {
 //user A+
 function updateTrendingStairsDays() {
   user.findTrendingActivityDays(user.trendingStairsDays, 'flightsOfStairs', 'climbing');
-  $('.trending-stairs-phrase-container').text(`<p class='trend-line'>${user.trendingStairsDays[0]}</p>`);
+  $('.trending-stairs-phrase-container').html(`<p class='trend-line'>${user.trendingStairsDays[0]}</p>`);
 }
 
 //user
 function updateTrendingStepDays() {
   user.findTrendingActivityDays(user.trendingStepDays, 'steps', 'step');
-  $('.trending-steps-phrase-container').text(`<p class='trend-line'>${user.trendingStepDays[0]}</p>`);
+  $('.trending-steps-phrase-container').html(`<p class='trend-line'>${user.trendingStepDays[0]}</p>`);
 }
 
-//user
-function displayDailyOunces() {
- for (var i = 0; i < dailyOz.length; i++) {
-   dailyOz[i].innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
- }
+//user 
+const displayDailyOunces = () => {
+  for (var i = 0; i < dailyOz.length; i++) {
+    dailyOz[i].innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
+  }
 }
 
 const sortHydrationData = () => {
@@ -414,12 +402,10 @@ const findFriendsNames = () => {
 const getUserHydrationToday = () => {
   $('#hydration-user-ounces-today').text(hydrationData.find(hydration => {
     return hydration.userID === user.id && hydration.date === todayDate;
-  }).numOunces
-  );
+  }).numOunces);
   $('#hydration-info-glasses-today').text(hydrationData.find(hydration => {
     return hydration.userID === user.id && hydration.date === todayDate;
-  }).numOunces / 8
-  );
+  }).numOunces / 8);
 }
 
 //sleep A+
@@ -454,7 +440,7 @@ const displayStairsCalendar = () => {
 
 //user do we want to combine this later? A+
 const displayStairsTrending = () => {
-  $('.stairs-trending-button').click(function() {
+  $('.stairs-trending-button').click(function () {
     user.findTrendingStairsDays();
     $('.trending-stairs-phrase-container').text(`<p class='trend-line'>${user.trendingStairsDays[0]}</p>`);
   });
@@ -468,7 +454,7 @@ const displayStepsCalendar = () => {
 
 //user do we want to combine later COME BACK HERE!!!
 const displayStepsTrending = () => {
-  stepsTrendingButton.addEventListener('click', function() {
+  $('.steps-trending-button').click(function () {
     user.findTrendingStepDays();
     $('.trending-steps-phrase-container').text(`<p class='trend-line'>${user.trendingStepDays[0]}</p>`);
   });
@@ -494,19 +480,19 @@ const displayFriendsStairs = () => {
 
 // This appears to be used with displayFriendsActivity? why isnt color showing for green and red sometimes
 const friendStepStyling = () => {
-let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
+  let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
 
-friendsStepsParagraphs.forEach(paragraph => {
-  if (friendsStepsParagraphs[0] === paragraph) {
-    paragraph.classList.add('green-text');
-  }
-  if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
-    paragraph.classList.add('red-text');
-  }
-  if (paragraph.innerText.includes('YOU')) {
-    paragraph.classList.add('yellow-text');
-  }
-});
+  friendsStepsParagraphs.forEach(paragraph => {
+    if (friendsStepsParagraphs[0] === paragraph) {
+      paragraph.classList.add('green-text');
+    }
+    if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
+      paragraph.classList.add('red-text');
+    }
+    if (paragraph.innerText.includes('YOU')) {
+      paragraph.classList.add('yellow-text');
+    }
+  });
 
 }
 
