@@ -115,13 +115,9 @@ let stairsFriendsCard = document.querySelector('#stairs-friends-card');
 let stairsInfoCard = document.querySelector('#stairs-info-card');
 let stairsMainCard = document.querySelector('#stairs-main-card');
 let stairsTrendingCard = document.querySelector('#stairs-trending-card');
-let userInfoDropdown = document.querySelector('#user-info-dropdown');
 let postActiviyButton = document.querySelector('.post-activity-button');
 let postHydrationButton = document.querySelector('.post-hydration-button');
 let postSleepButton = document.querySelector('.post-sleep-button');
-let postActivityDropdown = document.querySelector('#post-activity-dropdown');
-let postHydrationDropdown = document.querySelector('#post-hydration-dropdown');
-let postSleepDropdown = document.querySelector('#post-sleep-dropdown');
 let ouncesInput = document.querySelector('#ounces-input');
 let stepsInput = document.querySelector('#steps-input');
 let stairsInput = document.querySelector('#stairs-input');
@@ -157,7 +153,7 @@ const postSleepInfo = () => {
       .catch(error => console.error(error));
     sleepHoursInput.value = '';
     sleepQualityInput.value = '';
-    postSleepDropdown.classList.add('hide');
+    $('#post-sleep-dropdown').addClass('hide');
     alert('Successful submission!')
   }
 }
@@ -184,7 +180,7 @@ const postActivityInfo = () => {
     stepsInput.value = '';
     minutesInput.value = '';
     stairsInput.value = '';
-    postActivityDropdown.classList.add('hide');
+    $('#post-activity-dropdown').addClass('hide');
     alert('Successful submission!')
   }
 }
@@ -207,35 +203,35 @@ const postHydrationInfo = () => {
       .then(response => response.json())
       .catch(error => console.error(error));
     ouncesInput.value = '';
-    postHydrationDropdown.classList.add('hide');
+    $('#post-hydration-dropdown').addClass('hide');
     alert('Successful submission!')
   }
 }
 
 const showUpdateDropdown = () => {
   if (event.target === postActiviyButton) {
-    postActivityDropdown.classList.toggle('hide');
-    postHydrationDropdown.classList.add('hide');
-    postSleepDropdown.classList.add('hide');
-    userInfoDropdown.classList.add('hide');
+    $('#post-activity-dropdown').toggleClass('hide');
+    $('#post-hydration-dropdown').addClass('hide');
+    $('#post-sleep-dropdown').addClass('hide');
+    $('#user-info-dropdown').addClass('hide');
   }
   if (event.target === postHydrationButton) {
-    postHydrationDropdown.classList.toggle('hide');
-    postActivityDropdown.classList.add('hide');
-    postSleepDropdown.classList.add('hide');
-    userInfoDropdown.classList.add('hide');
+    $('#post-hydration-dropdown').toggleClass('hide');
+    $('#post-activity-dropdown').addClass('hide');
+    $('#post-sleep-dropdown').addClass('hide');
+    $('#user-info-dropdown').addClass('hide');
   }
   if (event.target === postSleepButton) {
-    postSleepDropdown.classList.toggle('hide');
-    postActivityDropdown.classList.add('hide');
-    postHydrationDropdown.classList.add('hide');
-    userInfoDropdown.classList.add('hide');
+    $('#post-sleep-dropdown').toggleClass('hide');
+    $('#post-activity-dropdown').addClass('hide');
+    $('#post-hydration-dropdown').addClass('hide');
+    $('#user-info-dropdown').addClass('hide');
   }
   if (event.target === profileButton) {
-    userInfoDropdown.classList.toggle('hide');
-    postActivityDropdown.classList.add('hide');
-    postHydrationDropdown.classList.add('hide');
-    postSleepDropdown.classList.add('hide');
+    $('#user-info-dropdown').toggleClass('hide');
+    $('#post-activity-dropdown').addClass('hide');
+    $('#post-hydration-dropdown').addClass('hide');
+    $('#post-sleep-dropdown').addClass('hide');
   }
 }
 
