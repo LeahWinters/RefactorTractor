@@ -4,7 +4,33 @@ $sleep-color: #FBD089;
 $steps-color: #F5634B;
 $stairs-color: #8975B2;
 $white-font-color: #FFFFFF;
-$main-font: sans-serif;
+$green-text: green;
+$red-text: red;
+$yellow-text: #F8BA00;
+$main-font-style: sans-serif;
+$card-font: 'Work Sans';
+
+@mixin postDropDowns() {
+  background-color: $back-ground-color;
+  color: $white-font-color;
+  margin-right: 50%;
+  text-align: center;
+}
+
+@mixin postBtns {
+  font-size: 5em;
+  height: 47%;
+  width: 29%;
+  border-radius: 29%;
+}
+
+@mixin infoBtns() {
+  background-position: center;
+  background-size: 3.4vw;
+  border: none;
+  height: 3.4vw;
+  width: 3.4vw;
+}
 
 *,
 *:after,
@@ -16,7 +42,7 @@ padding: 0;
 
 body {
   background-color: $back-ground-color;
-  font-family: 'Oswald', $main-font;
+  font-family: 'Oswald', $main-font-style;
 }
 
 /* HEADER */
@@ -62,22 +88,12 @@ form {
 .post-activity-button,
 .post-hydration-button,
 .post-sleep-button {
-  font-size: 5em;
-  height: 47%;
-  width: 24%;
-  border-radius: 29%;
+  @include postBtns();
 }
 
 .post-activity-button {
   background-color: $steps-color;
   border: $steps-color;
-}
-
-#post-activity-dropdown {
-  background-color: $back-ground-color;
-  color: $white-font-color;
-  margin-right: 50%;
-  text-align: center;
 }
 
 #all-drop-downs button {
@@ -90,11 +106,10 @@ form {
   border: $hydration-color;
 }
 
-#post-hydration-dropdown {
-  background-color: $back-ground-color;
-  color: $white-font-color;
-  margin-right: 50%;
-  text-align: center;
+#post-activity-dropdown,
+#post-hydration-dropdown,
+#post-sleep-dropdown {
+  @include postDropDowns();
 }
 
 .post-sleep-button {
@@ -102,11 +117,9 @@ form {
   border: $sleep-color;
 }
 
-#post-sleep-dropdown {
-  background-color: $back-ground-color;
-  color: $white-font-color;
-  margin-right: 50%;
-  text-align: center;
+#sleep-hours-input,
+#sleep-quality-input {
+  width: 20%
 }
 
 .sleep-quality-form,
@@ -120,7 +133,7 @@ form {
 }
 
 .sleep-hours-form {
-  padding-left: 3.5%;
+  padding-left: 2%;
 }
 
 #profile-button {
@@ -168,7 +181,7 @@ h2 {
 
 h3 {
   display: inline;
-  font-family: 'Work Sans', $main-font;
+  font-family: $card-font, $main-font-style;
   font-size: 3vw;
   font-weight: 700;
   letter-spacing: .2em;
@@ -185,7 +198,7 @@ h5 {
 }
 
 p {
-  font-family: 'Work Sans', $main-font;
+  font-family: $card-font, $main-font-style;
   font-size: 1.2vw;
   font-weight: 600;
   letter-spacing: .2vw;
@@ -249,7 +262,8 @@ main {
   margin: .5vw;
 }
 
-.card-data-line {
+.card-data-line,
+.hydration-data-line {
   display: flex;
   justify-content: center;
   margin-bottom: 2vw;
@@ -264,12 +278,6 @@ main {
   font-size: 2vw;
 }
 
-.hydration-data-line {
-  display: flex;
-  justify-content: center;
-  margin-bottom: .2vw;
-}
-
 .trend-line {
   font-size: 2vw;
   text-align: center;
@@ -278,52 +286,33 @@ main {
 
 /* BUTTONS */
 .info-button {
-  background-position: center;
-  background-size: 3.4vw;
-  border: none;
   display: inline;
   height: 3.4vw;
-  margin-left: 1vw;
-  width: 3.4vw;
 }
 
 .friends-button {
-  background-position: center;
-  background-size: 3.4vw;
-  border: none;
   display: inline;
-  height: 3.4vw;
   margin-right: 1vw;
-  width: 3.4vw;
 }
 
 .calendar-button {
-  background-position: center;
-  background-size: 3.4vw;
-  border: none;
   display: inline;
   float: right;
-  height: 3.4vw;
   margin-right: 1vw;
-  width: 3.4vw;
 }
 
-.trending-button {
-  background-position: center;
-  background-size: 3.4vw;
-  border: none;
-  height: 3.4vw;
-  margin-left: 1vw;
-  width: 3.4vw;
-}
-
+.info-button,
+.friends-button,
+.calendar-button,
+.trending-button,
 .go-back-button {
-  background-position: center;
-  background-size: 3.4vw;
-  border: none;
-  height: 3.4vw;
+  @include infoBtns;
+}
+
+.go-back-button,
+.info-button,
+.trending-button {
   margin-left: 1vw;
-  width: 3.4vw;
 }
 
 .steps-go-back-button {
@@ -405,13 +394,13 @@ main {
 }
 
 .green-text {
-  color: green;
+  color: $green-text;
 }
 
 .red-text {
-  color: red;
+  color: $red-text;
 }
 
 .yellow-text {
-  color: #F8BA00;
+  color: $yellow-text;
 }
