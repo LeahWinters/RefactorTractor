@@ -8,6 +8,8 @@ import Activity from './Activity';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
 
+let matchActivityID;
+
 let userData;
 let sleepData;
 let activityData;
@@ -70,6 +72,7 @@ const sleepHandler = () => {
 
 const userHandlder = () => {
   currentUserId = returnUserId();
+  matchActivityID = findActivityID();
   displayUserFirstName();
   // findFriendsNames();
   sortHydrationData();
@@ -77,9 +80,9 @@ const userHandlder = () => {
   getUserHydrationToday();
   displayUserSleepAverages();
   displayStairsCalendar();
-  displayStairsTrending();
-  displayStepsTrending()
-  updateTrendingStairsDays();
+  // displayStairsTrending();
+  // displayStepsTrending()
+  // updateTrendingStairsDays();
   displayStepsCalendar();
   showWalkedMiles();
   displayFriendsStepsWeekly();
@@ -177,7 +180,7 @@ let sleepQualityInput = document.querySelector('#sleep-quality-input');
 // let submitSleep = document.querySelector('#submit-sleep-button');
 
 $('.header').click(showUpdateDropdown);
-$('main').on('click', showInfo);
+$('main').click(showInfo);
 $('.stairs-trending-button').click(updateTrendingStairsDays);
 $('.steps-trending-button').click(updateTrendingStepDays);
 $('#submit-hydration-button').click(postHydrationInfo);
@@ -364,9 +367,13 @@ function updateTrendingStepDays() {
 
 //user 
 const displayDailyOunces = () => {
-  for (var i = 0; i < dailyOz.length; i++) {
-    dailyOz[i].innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
-  }
+  // console.log(dailyOz)
+  dailyOz.forEach((day, i) => {
+    day.innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
+  })
+  // for (var i = 0; i < dailyOz.length; i++) {
+  //   dailyOz[i].innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
+  // }
 }
 
 const sortHydrationData = () => {
@@ -398,9 +405,10 @@ const displayUserDropDownInfo = () => {
   $('#dropdown-name').text(user.name.toUpperCase());
 }
 
-const findFriendsNames = () => {
-  user.findFriendsNames(userRepository.users);
-}
+// probably dont need it
+// const findFriendsNames = () => {
+//   user.findFriendsNames(userRepository.users);
+// }
 
 // hydration A+
 const getUserHydrationToday = () => {
@@ -436,19 +444,19 @@ const showWalkedMiles = () => {
     return (activity.date === todayDate && activity.userId === user.id)
   }).calculateMiles(userRepository));
 }
-//user A+
+//user A+ Might not need
 const displayStairsCalendar = () => {
   $('#stairs-calendar-flights-average-weekly').text(user.calculateAverageWeeklyExercise(todayDate, 'flightsOfStairs'));
   $('#stairs-calendar-stairs-average-weekly').text((user.calculateAverageWeeklyExercise(todayDate, 'flightsOfStairs') * 12).toFixed(0));
 }
 
 //user do we want to combine this later? A+
-const displayStairsTrending = () => {
-  $('.stairs-trending-button').click(function () {
-    user.findTrendingStairsDays();
-    $('.trending-stairs-phrase-container').text(`<p class='trend-line'>${user.trendingStairsDays[0]}</p>`);
-  });
-}
+// const displayStairsTrending = () => {
+//   $('.stairs-trending-button').click(function () {
+//     user.findTrendingStairsDays();
+//     $('.trending-stairs-phrase-container').html(`<p class='trend-line'>${user.trendingStairsDays[0]}</p>`);
+//   });
+// }
 
 //user A+
 const displayStepsCalendar = () => {
@@ -457,12 +465,12 @@ const displayStepsCalendar = () => {
 }
 
 //user do we want to combine later COME BACK HERE!!!
-const displayStepsTrending = () => {
-  $('.steps-trending-button').click(function () {
-    user.findTrendingStepDays();
-    $('.trending-steps-phrase-container').text(`<p class='trend-line'>${user.trendingStepDays[0]}</p>`);
-  });
-}
+// const displayStepsTrending = () => {
+//   $('.steps-trending-button').click(function () {
+//     user.findTrendingStepDays();
+//     $('.trending-steps-phrase-container').html(`<p class='trend-line'>${user.trendingStepDays[0]}</p>`);
+//   });
+// }
 
 //user A+
 const displayFriendsStepsWeekly = () => {
@@ -526,7 +534,7 @@ const displayFriendsStepsAverages = () => {
   $('#steps-friend-steps-average-today').text(userRepository.calculateAverageSteps(todayDate, 'steps'));
 }
 
-
+//Probably dont need
 // const gatherUserInfo = () => {
 //   activityData.find(activity => {
 //     return activity.userID === user.id && activity.date === todayDate;
@@ -535,29 +543,26 @@ const displayFriendsStepsAverages = () => {
 
 //activity A+
 const displayStairsInfo = () => {
-  $('#stairs-info-flights-today').text(activityData.find(activity => {
-    return activity.userID === user.id && activity.date === todayDate;
-  }).flightsOfStairs);
+  $('#stairs-info-flights-today').text(matchActivityID.flightsOfStairs);
 }
+
+const findActivityID = () => {
+  return activityData.find(activity => {
+    return activity.userID === user.id && activity.date === todayDate;
+  })
+} 
 
 //activity A+
 const displayMainStairsCard = () => {
-  $('#stairs-user-stairs-today').text(activityData.find(activity => {
-    return activity.userID === user.id && activity.date === todayDate;
-  }).flightsOfStairs * 12);
+  $('#stairs-user-stairs-today').text(matchActivityID.flightsOfStairs * 12)
 }
 
 //activity A+
 const displayStepsInfo = () => {
-  $('#steps-info-active-minutes-today').text(activityData.find(activity => {
-    return activity.userID === user.id && activity.date === todayDate;
-  }).minutesActive);
+  $('#steps-info-active-minutes-today').text(matchActivityID.minutesActive);
 }
 
 //activity ?? wtf is numsteps <- this is on the activity data A+
 const displayMainStepsCard = () => {
-  // $('#steps-user-steps-today').text(gatherUserInfo().activity.numSteps);
-  $('#steps-user-steps-today').text(activityData.find(activity => {
-    return activity.userID === user.id && activity.date === todayDate;
-  }).numSteps);
+  $('#steps-user-steps-today').text(matchActivityID.numSteps);
 }
