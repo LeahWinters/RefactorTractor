@@ -106,9 +106,7 @@ const handleTrendingStairsDays = () => {
 }
 
 const postSleepInfo = () => {
-  let sleepHoursInput = $('#sleep-hours-input').val();
-  let sleepQualityInput = $('#sleep-quality-input').val();
-  if (!sleepHoursInput || sleepHoursInput > 24 || !sleepQualityInput || sleepQualityInput > 5) {
+  if ($('#sleep-hours-input').val() === '' || $('#sleep-hours-input').val() > 24 || $('#sleep-quality-input').val() === '' || $('#sleep-quality-input').val() > 5) {
     alert('You need to enter a valid number!')
   } else {
     fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
@@ -133,9 +131,7 @@ const postSleepInfo = () => {
 }
 
 const postActivityInfo = () => {
-  let stepsInput = $('#steps-input').val();
-  let minutesInput = $('#minutes-input').val();
-  if (!stepsInput || !minutesInput) {
+  if ($('#steps-input').val() === '' || $('#minutes-input').val() === '') {
     alert('You need to enter a valid number!')
   } else {
     fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData', {
@@ -162,8 +158,7 @@ const postActivityInfo = () => {
 }
 
 const postHydrationInfo = () => {
-  let ouncesInput = $('#ounces-input').value;
-  if (!ouncesInput) {
+  if ($('#ounces-input').value() === '') {
     alert('You need to enter a valid number!')
   } else {
     fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData', {
