@@ -96,24 +96,6 @@ fetchData().then(data => {
   .catch(error => console.log(error));
 
 let dailyOz = document.querySelectorAll('.daily-oz');
-let hydrationCalendarCard = $('#hydration-calendar-card');
-let hydrationFriendsCard = $('#hydration-friends-card');
-let hydrationInfoCard = $('#hydration-info-card');
-let hydrationMainCard = $('#hydration-main-card');
-let sleepCalendarCard = $('#sleep-calendar-card');
-let sleepFriendsCard = $('#sleep-friends-card');
-let sleepInfoCard = $('#sleep-info-card');
-let sleepMainCard = $('#sleep-main-card');
-let stairsCalendarCard = $('#stairs-calendar-card');
-let stepsMainCard = $('#steps-main-card');
-let stepsInfoCard = $('#steps-info-card');
-let stepsFriendsCard = $('#steps-friends-card');
-let stepsTrendingCard = $('#steps-trending-card');
-let stepsCalendarCard = $('#steps-calendar-card');
-let stairsFriendsCard = $('#stairs-friends-card');
-let stairsInfoCard = $('#stairs-info-card');
-let stairsMainCard = $('#stairs-main-card');
-let stairsTrendingCard = $('#stairs-trending-card');
 
 const handleTrendingStepDays = () => {
   domUpdates.updateTrendingStepDays(user)
@@ -251,61 +233,77 @@ const flipCard = (cardToHide, cardToShow) => {
   cardToShow.removeClass('hide');
 }
 
-const showInfo = () => {
+const flipStepsCards = () => {
   if ($(event.target).is('.steps-info-button')) {
-    flipCard(stepsMainCard, stepsInfoCard);
+    flipCard($('#steps-main-card'), $('#steps-info-card'));
   }
   if ($(event.target).is('.steps-friends-button')) {
-    flipCard(stepsMainCard, stepsFriendsCard);
+    flipCard($('#steps-main-card'), $('#steps-friends-card'));
   }
   if ($(event.target).is('.steps-trending-button')) {
-    flipCard(stepsMainCard, stepsTrendingCard);
+    flipCard($('#steps-main-card'), $('#steps-trending-card'));
   }
   if ($(event.target).is('.steps-calendar-button')) {
-    flipCard(stepsMainCard, stepsCalendarCard);
-  }
-  if ($(event.target).is('.hydration-info-button')) {
-    flipCard(hydrationMainCard, hydrationInfoCard);
-  }
-  if ($(event.target).is('.hydration-friends-button')) {
-    flipCard(hydrationMainCard, hydrationFriendsCard);
-  }
-  if ($(event.target).is('.hydration-calendar-button')) {
-    flipCard(hydrationMainCard, hydrationCalendarCard);
-  }
-  if ($(event.target).is('.stairs-info-button')) {
-    flipCard(stairsMainCard, stairsInfoCard);
-  }
-  if ($(event.target).is('.stairs-friends-button')) {
-    flipCard(stairsMainCard, stairsFriendsCard);
-  }
-  if ($(event.target).is('.stairs-trending-button')) {
-    flipCard(stairsMainCard, stairsTrendingCard);
-  }
-  if ($(event.target).is('.stairs-calendar-button')) {
-    flipCard(stairsMainCard, stairsCalendarCard);
-  }
-  if ($(event.target).is('.sleep-info-button')) {
-    flipCard(sleepMainCard, sleepInfoCard);
-  }
-  if ($(event.target).is('.sleep-friends-button')) {
-    flipCard(sleepMainCard, sleepFriendsCard);
-  }
-  if ($(event.target).is('.sleep-calendar-button')) {
-    flipCard(sleepMainCard, sleepCalendarCard);
+    flipCard($('#steps-main-card'), $('#steps-calendar-card'));
   }
   if ($(event.target).is('.steps-go-back-button')) {
-    flipCard($(event.target.parentNode), stepsMainCard);
+    flipCard($(event.target.parentNode), $('#steps-main-card'));
+  }
+}
+
+const flipHydrationCards = () => {
+  if ($(event.target).is('.hydration-info-button')) {
+    flipCard($('#hydration-main-card'), $('#hydration-info-card'));
+  }
+  if ($(event.target).is('.hydration-friends-button')) {
+    flipCard($('#hydration-main-card'), $('#hydration-friends-card'));
+  }
+  if ($(event.target).is('.hydration-calendar-button')) {
+    flipCard($('#hydration-main-card'), $('#hydration-calendar-card'));
   }
   if ($(event.target).is('.hydration-go-back-button')) {
-    flipCard($(event.target.parentNode), hydrationMainCard);
+    flipCard($(event.target.parentNode), $('#hydration-main-card'));
+  }
+}
+
+const flipStairsCards = () => {
+  if ($(event.target).is('.stairs-info-button')) {
+    flipCard($('#stairs-main-card'), $('#stairs-info-card'));
+  }
+  if ($(event.target).is('.stairs-friends-button')) {
+    flipCard($('#stairs-main-card'), $('#stairs-friends-card'));
+  }
+  if ($(event.target).is('.stairs-trending-button')) {
+    flipCard($('#stairs-main-card'), $('#stairs-trending-card'));
+  }
+  if ($(event.target).is('.stairs-calendar-button')) {
+    flipCard($('#stairs-main-card'), $('#stairs-calendar-card'));
   }
   if ($(event.target).is('.stairs-go-back-button')) {
-    flipCard($(event.target.parentNode), stairsMainCard);
+    flipCard($(event.target.parentNode), $('#stairs-main-card'));
+  }
+}
+
+const flipSleepCards = () => {
+  if ($(event.target).is('.sleep-info-button')) {
+    flipCard($('#sleep-main-card'), $('#sleep-info-card'));
+  }
+  if ($(event.target).is('.sleep-friends-button')) {
+    flipCard($('#sleep-main-card'), $('#sleep-friends-card'));
+  }
+  if ($(event.target).is('.sleep-calendar-button')) {
+    flipCard($('#sleep-main-card'), $('#sleep-calendar-card'));
   }
   if ($(event.target).is('.sleep-go-back-button')) {
-    flipCard($(event.target.parentNode), sleepMainCard);
+    flipCard($(event.target.parentNode), $('#sleep-main-card'));
   }
+}
+
+const showInfo = () => {
+  flipStepsCards();
+  flipHydrationCards();
+  flipStairsCards();
+  flipSleepCards()
 }
 
 $('.header').click(showUpdateDropdown);
