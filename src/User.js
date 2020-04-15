@@ -1,4 +1,4 @@
- class User {
+class User {
   constructor(userData) {
     this.id = userData.id;
     this.name = userData.name;
@@ -21,7 +21,7 @@
     this.friendsNames = [];
     this.friendsActivityRecords = [];
   }
-  
+
   getFirstName() {
     var names = this.name.split(' ');
     return names[0].toUpperCase();
@@ -66,6 +66,7 @@
       this.sleepQualityAverage = quality;
     }
   }
+
   calculateSleepAverages(todayDate, record, type) {
     return (record.reduce((sum, sleepAct) => {
       let index = record.indexOf(record.find(sleep => sleep.date === todayDate));

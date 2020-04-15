@@ -1,7 +1,5 @@
 import { expect } from 'chai';
-
 import User from '../src/User';
-
 
 describe('User', () => {
   let user;
@@ -180,7 +178,7 @@ describe('User', () => {
 
   it('should find 3+ days with positive steps trend', () => {
     user.activityRecord = [{
-    "date": "2019/06/29", "steps": 2},
+      "date": "2019/06/29", "steps": 2},
     {"date": "2019/06/28", "steps": 1},
     {"date": "2019/06/27", "steps": 4},
     {"date": "2019/06/26", "steps": 3},
@@ -198,7 +196,7 @@ describe('User', () => {
 
   it('findTrendingStairsDays should find 3+ days with positive trend', () => {
     user.activityRecord = [{
-    "date": "2019/06/29", "flightsOfStairs": 4},
+      "date": "2019/06/29", "flightsOfStairs": 4},
     {"date": "2019/06/28", "flightsOfStairs": 1},
     {"date": "2019/06/27", "flightsOfStairs": 16},
     {"date": "2019/06/26", "flightsOfStairs": 15},
@@ -234,7 +232,7 @@ describe('User', () => {
 
   it('calculateTotalStepsThisWeek should add users steps for week', () => {
     user.activityRecord = [{
-    "date": "2019/06/29", "steps": 2},
+      "date": "2019/06/29", "steps": 2},
     {"date": "2019/06/28", "steps": 1},
     {"date": "2019/06/27", "steps": 4},
     {"date": "2019/06/26", "steps": 3},
@@ -264,7 +262,7 @@ describe('User', () => {
       'name': 'Nick Adams',
     })
     user2.activityRecord = [{
-    "date": "2019/06/29", "steps": 25},
+      "date": "2019/06/29", "steps": 25},
     {"date": "2019/06/28", "steps": 1},
     {"date": "2019/06/27", "steps": 43},
     {"date": "2019/06/26", "steps": 35},
@@ -276,8 +274,8 @@ describe('User', () => {
     {"date": "2019/06/20", "steps": 85},
     {"date": "2019/06/19", "steps": 11},
     {"date": "2019/06/18", "steps": 10}];
-  user3.activityRecord = [{
-    "date": "2019/06/29", "steps": 2},
+    user3.activityRecord = [{
+      "date": "2019/06/29", "steps": 2},
     {"date": "2019/06/28", "steps": 21},
     {"date": "2019/06/27", "steps": 24},
     {"date": "2019/06/26", "steps": 23},
@@ -289,8 +287,8 @@ describe('User', () => {
     {"date": "2019/06/20", "steps": 82},
     {"date": "2019/06/19", "steps": 141},
     {"date": "2019/06/18", "steps": 10}];
-  user4.activityRecord = [{
-    "date": "2019/06/29", "steps": 2},
+    user4.activityRecord = [{
+      "date": "2019/06/29", "steps": 2},
     {"date": "2019/06/28", "steps": 1},
     {"date": "2019/06/27", "steps": 4},
     {"date": "2019/06/26", "steps": 3},

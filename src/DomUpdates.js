@@ -1,12 +1,11 @@
-// import user from './scripts'; 
 
 let domUpdates = {
-  
+
   findActivityID(activityData, user, todayDate) {
     return activityData.find(activity => {
       return activity.userID === user.id && activity.date === todayDate;
     })
-  }, 
+  },
 
   displayMainStepsCard(matchActivityID) {
     $('#steps-user-steps-today').text(matchActivityID.numSteps);
@@ -49,7 +48,7 @@ let domUpdates = {
 
   friendStepStyling() {
     let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
-  
+
     friendsStepsParagraphs.forEach(paragraph => {
       if (friendsStepsParagraphs[0] === paragraph) {
         paragraph.classList.add('green-text');
@@ -113,8 +112,8 @@ let domUpdates = {
     dailyOz.forEach((day, i) => {
       day.innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
     })
-  }, 
-  
+  },
+
   updateTrendingStepDays(user) {
     user.findTrendingActivityDays(user.trendingStepDays, 'steps', 'step');
     $('.trending-steps-phrase-container').html(`<p class='trend-line'>${user.trendingStepDays[0]}</p>`);

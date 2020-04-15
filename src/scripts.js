@@ -10,7 +10,6 @@ import Sleep from './Sleep';
 import domUpdates from './DomUpdates';
 
 let matchActivityID;
-
 let userData;
 let sleepData;
 let activityData;
@@ -38,7 +37,7 @@ let onloadHandler = () => {
   activityData.forEach(acti => {
     activity = new Activity(acti, userRepository);
   });
-  
+
   sleepData.forEach(datum => {
     sleep = new Sleep(datum, userRepository);
   });
@@ -87,11 +86,11 @@ const userRepoHandler = () => {
 }
 
 fetchData().then(data => {
-    userData = data.userData;
-    sleepData = data.sleepData;
-    activityData = data.activityData;
-    hydrationData = data.hydrationData
-  })
+  userData = data.userData;
+  sleepData = data.sleepData;
+  activityData = data.activityData;
+  hydrationData = data.hydrationData
+})
   .then(onloadHandler)
   .catch(error => console.log(error));
 
@@ -110,17 +109,17 @@ const postSleepInfo = () => {
     alert('You need to enter a valid number!')
   } else {
     fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          'userID': currentUserId,
-          'date': todayDate,
-          'hoursSlept': Number($('#sleep-hours-input').val()),
-          'sleepQuality': Number($('#sleep-quality-input').val()),
-        })
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'userID': currentUserId,
+        'date': todayDate,
+        'hoursSlept': Number($('#sleep-hours-input').val()),
+        'sleepQuality': Number($('#sleep-quality-input').val()),
       })
+    })
       .then(response => response.json())
       .catch(error => console.error(error));
     $('#sleep-hours-input').val('');
@@ -135,18 +134,18 @@ const postActivityInfo = () => {
     alert('You need to enter a valid number!')
   } else {
     fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          'userID': currentUserId,
-          'date': todayDate,
-          'numSteps': Math.round($('#steps-input').val()),
-          'minutesActive': Math.round($('#minutes-input').val()),
-          'flightsOfStairs': Math.round($('#stairs-input').val())
-        })
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'userID': currentUserId,
+        'date': todayDate,
+        'numSteps': Math.round($('#steps-input').val()),
+        'minutesActive': Math.round($('#minutes-input').val()),
+        'flightsOfStairs': Math.round($('#stairs-input').val())
       })
+    })
       .then(response => response.json())
       .catch(error => console.error(error));
     $('#steps-input').val('');
@@ -162,16 +161,16 @@ const postHydrationInfo = () => {
     alert('You need to enter a valid number!')
   } else {
     fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          'userID': currentUserId,
-          'date': todayDate,
-          'numOunces': Number($('#ounces-input').val())
-        })
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'userID': currentUserId,
+        'date': todayDate,
+        'numOunces': Number($('#ounces-input').val())
       })
+    })
       .then(response => response.json())
       .catch(error => console.error(error));
     $('#ounces-input').val('');
@@ -181,7 +180,7 @@ const postHydrationInfo = () => {
 }
 
 const showActivityDropdown = () => {
-    if ($(event.target).is('.post-activity-button')) {
+  if ($(event.target).is('.post-activity-button')) {
     $('#post-activity-dropdown').toggleClass('hide');
     $('#post-hydration-dropdown').addClass('hide');
     $('#post-sleep-dropdown').addClass('hide');
@@ -190,7 +189,7 @@ const showActivityDropdown = () => {
 }
 
 const showHydrationDropdown = () => {
-    if ($(event.target).is('.post-hydration-button')) {
+  if ($(event.target).is('.post-hydration-button')) {
     $('#post-hydration-dropdown').toggleClass('hide');
     $('#post-activity-dropdown').addClass('hide');
     $('#post-sleep-dropdown').addClass('hide');
@@ -199,16 +198,16 @@ const showHydrationDropdown = () => {
 }
 
 const showSleepDropdown = () => {
-   if ($(event.target).is('.post-sleep-button')) {
+  if ($(event.target).is('.post-sleep-button')) {
     $('#post-sleep-dropdown').toggleClass('hide');
     $('#post-activity-dropdown').addClass('hide');
     $('#post-hydration-dropdown').addClass('hide');
     $('#user-info-dropdown').addClass('hide');
-  } 
+  }
 }
 
 const showUserDropdown = () => {
-    if ($(event.target).is('#profile-button')) {
+  if ($(event.target).is('#profile-button')) {
     $('#user-info-dropdown').toggleClass('hide');
     $('#post-activity-dropdown').addClass('hide');
     $('#post-hydration-dropdown').addClass('hide');
@@ -309,26 +308,6 @@ $('#submit-hydration-button').click(postHydrationInfo);
 $('#submit-activity-button').click(postActivityInfo);
 $('#submit-sleep-button').click(postSleepInfo);
 
-//user A+
-// const updateTrendingStairsDays() {
-//   user.findTrendingActivityDays(user.trendingStairsDays, 'flightsOfStairs', 'climbing');
-//   $('.trending-stairs-phrase-container').html(`<p class='trend-line'>${user.trendingStairsDays[0]}</p>`);
-// }
-
-//user
-// function updateTrendingStepDays() {
-//   user.findTrendingActivityDays(user.trendingStepDays, 'steps', 'step');
-//   $('.trending-steps-phrase-container').html(`<p class='trend-line'>${user.trendingStepDays[0]}</p>`);
-// }
-
-//user 
-// const displayDailyOunces = () => {
-//   dailyOz.forEach((day, i) => {
-//     day.innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
-//   })
-// }
-
-//STAYS HERE
 const sortHydrationData = () => {
   sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
     if (Object.keys(a)[0] > Object.keys(b)[0]) {
@@ -341,178 +320,6 @@ const sortHydrationData = () => {
   });
 }
 
-// const displayUserFirstName = () => {
-//   $('#header-name').text(`${user.getFirstName()}'S `);
-//   displayUserDropDownInfo(user);
-// }
-
-//STAYS HERE
 const returnUserId = () => {
   return user.id;
 }
-
-
-// user A+
-// const displayUserDropDownInfo = () => {
-//   $('#dropdown-goal').text(`DAILY STEP GOAL | ${user.dailyStepGoal}`);
-//   $('#dropdown-email').text(`EMAIL | ${user.email}`);
-//   $('#dropdown-name').text(user.name.toUpperCase());
-// }
-
-// probably dont need it
-// const findFriendsNames = () => {
-//   user.findFriendsNames(userRepository.users);
-// }
-
-// hydration A+
-// const getUserHydrationToday = () => {
-//   $('#hydration-user-ounces-today').text(hydrationData.find(hydration => {
-//     return hydration.userID === user.id && hydration.date === todayDate;
-//   }).numOunces);
-//   $('#hydration-info-glasses-today').text(hydrationData.find(hydration => {
-//     return hydration.userID === user.id && hydration.date === todayDate;
-//   }).numOunces / 8);
-// }
-
-//sleep A+
-// const getUserSleepToday = () => {
-//   $('#sleep-info-quality-today').text(sleepData.find(sleep => {
-//     return sleep.userID === user.id && sleep.date === todayDate;
-//   }).sleepQuality);
-//   $('#sleep-user-hours-today').text(sleepData.find(sleep => {
-//     return sleep.userID === user.id && sleep.date === todayDate;
-//   }).hoursSlept);
-// }
-
-//user A+
-// const displayUserSleepAverages = () => {
-//   $('#sleep-calendar-hours-average-weekly').text(user.calculateSleepAverages(todayDate, user.sleepHoursRecord, 'hours'));
-//   $('#sleep-calendar-quality-average-weekly').text(user.calculateSleepAverages(todayDate, user.sleepQualityRecord, 'quality'));
-//   $('#sleep-info-hours-average-alltime').text(user.hoursSleptAverage);
-//   $('#sleep-info-quality-average-alltime').text(user.sleepQualityAverage);
-// }
-
-//user
-// const showWalkedMiles = () => {
-//   $('#steps-info-miles-walked-today').text(user.activityRecord.find(activity => {
-//     return (activity.date === todayDate && activity.userId === user.id)
-//   }).calculateMiles(userRepository));
-// }
-//user A+ Might not need
-// const displayStairsCalendar = () => {
-//   $('#stairs-calendar-flights-average-weekly').text(user.calculateAverageWeeklyExercise(todayDate, 'flightsOfStairs'));
-//   $('#stairs-calendar-stairs-average-weekly').text((user.calculateAverageWeeklyExercise(todayDate, 'flightsOfStairs') * 12).toFixed(0));
-// }
-
-//user do we want to combine this later? A+
-// const displayStairsTrending = () => {
-//   $('.stairs-trending-button').click(function () {
-//     user.findTrendingStairsDays();
-//     $('.trending-stairs-phrase-container').html(`<p class='trend-line'>${user.trendingStairsDays[0]}</p>`);
-//   });
-// }
-
-//user A+
-// const displayStepsCalendar = () => {
-//   $('#steps-calendar-total-active-minutes-weekly').text(user.calculateAverageWeeklyExercise(todayDate, 'minutesActive'));
-//   $('#steps-calendar-total-steps-weekly').text(user.calculateAverageWeeklyExercise(todayDate, 'steps'));
-// }
-
-//user do we want to combine later COME BACK HERE!!!
-// const displayStepsTrending = () => {
-//   $('.steps-trending-button').click(function () {
-//     user.findTrendingStepDays();
-//     $('.trending-steps-phrase-container').html(`<p class='trend-line'>${user.trendingStepDays[0]}</p>`);
-//   });
-// }
-
-//user A+
-// const displayFriendsStepsWeekly = () => {
-//   user.findFriendsTotalStepsForWeek(userRepository.users, todayDate);
-// }
-
-//user A+
-// const displayFriendsActivity = () => {
-//   user.friendsActivityRecords.forEach(friend => {
-//     $('#dropdown-friends-steps-container').append(`
-//     <p class='dropdown-p friends-steps'>${friend.firstName} | ${friend.totalWeeklySteps}</p>
-//     `);
-//   });
-// }
-
-// const displayFriendsStairs = () => {
-//   $('#stairs-friend-flights-average-today').text((userRepository.calculateAverageStairs(todayDate, 'flightsOfStairs') / 12).toFixed(1))
-// }
-
-// This appears to be used with displayFriendsActivity? why isnt color showing for green and red sometimes
-// const friendStepStyling = () => {
-//   let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
-
-//   friendsStepsParagraphs.forEach(paragraph => {
-//     if (friendsStepsParagraphs[0] === paragraph) {
-//       paragraph.classList.add('green-text');
-//     }
-//     if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
-//       paragraph.classList.add('red-text');
-//     }
-//     if (paragraph.innerText.includes('YOU')) {
-//       paragraph.classList.add('yellow-text');
-//     }
-//   });
-// }
-
-//userRepo A +
-
-// const displayFriendsHydration = () => {
-//   $('#hydration-friend-ounces-today').text(userRepository.calculateAverageDailyWater(todayDate));
-// }
-
-// const displayFriendsSleep = () => {
-//   $('#sleep-friend-longest-sleeper').text(userRepository.users.find(user => {
-//     return user.id === userRepository.getLongestSleepers(todayDate)
-//   }).getFirstName());
-//   $('#sleep-friend-worst-sleeper').text(userRepository.users.find(user => {
-//     return user.id === userRepository.getWorstSleepers(todayDate)
-//   }).getFirstName());
-// }
-
-
-//userRepo A+
-// const displayFriendsStepsAverages = () => {
-//   $('#steps-friend-active-minutes-average-today').text(userRepository.calculateAverageMinutesActive(todayDate, 'minutesActive'));
-//   $('#steps-friend-average-step-goal').text(`${userRepository.calculateAverageStepGoal()}`);
-//   $('#steps-friend-steps-average-today').text(userRepository.calculateAverageSteps(todayDate, 'steps'));
-// }
-
-//Probably dont need
-// const gatherUserInfo = () => {
-//   activityData.find(activity => {
-//     return activity.userID === user.id && activity.date === todayDate;
-//   });
-// }
-
-//activity A+
-// const displayStairsInfo = () => {
-//   $('#stairs-info-flights-today').text(matchActivityID.flightsOfStairs);
-// }
-
-// const findActivityID = () => {
-//   return activityData.find(activity => {
-//     return activity.userID === user.id && activity.date === todayDate;
-//   })
-// } 
-
-//activity A+
-// const displayMainStairsCard = () => {
-//   $('#stairs-user-stairs-today').text(matchActivityID.flightsOfStairs * 12)
-// }
-
-//activity A+
-// const displayStepsInfo = () => {
-//   $('#steps-info-active-minutes-today').text(matchActivityID.minutesActive);
-// }
-
-//activity ?? wtf is numsteps <- this is on the activity data A+
-// const displayMainStepsCard = () => {
-//   $('#steps-user-steps-today').text(matchActivityID.numSteps);
-// }
