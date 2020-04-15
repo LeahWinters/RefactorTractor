@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-
 import Hydration from '../src/Hydration';
 import UserRepository from '../src/UserRepository';
 import User from '../src/User';
@@ -43,10 +42,10 @@ describe('Hydration', () => {
     userRepository = new UserRepository();
     userRepository.users.push(user1, user2);
     hydrate1 = new Hydration({
-        "userID": 1,
-        "date": "2019/06/15",
-        "numOunces": 37
-      }, userRepository);
+      "userID": 1,
+      "date": "2019/06/15",
+      "numOunces": 37
+    }, userRepository);
     hydrate2 = new Hydration({
       "userID": 2,
       "date": "2019/06/15",

@@ -9,22 +9,27 @@ class Activity {
     this.reachedStepGoal = null;
     this.doActivity(userRepository);
   }
+
   doActivity(userRepo) {
-      userRepo.users
-        .find(user => user.id === this.userId)
-        .updateActivities(this);
+    userRepo.users
+      .find(user => user.id === this.userId)
+      .updateActivities(this);
   }
+
   findUser(userRepository) {
     return userRepository.users.find(user => user.id === this.userId);
   }
+
   calculateMiles(userRepository) {
     let walkingUser = this.findUser(userRepository)
     return Math.round(this.steps * walkingUser.strideLength / 5280).toFixed(1);
   }
+
   compareStepGoal(userRepository) {
     let userStepGoal = this.findUser(userRepository).dailyStepGoal;
     this.reachedStepGoal = this.steps >= userStepGoal;
   }
+
 }
 
 export default Activity;
